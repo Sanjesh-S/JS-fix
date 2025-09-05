@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorthyTen - Select Accessories</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body data-step="6">
+<div id="header"></div>
+<!-- Progress (paste below header) -->
+<div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
+
+
+
+<script src="js/header.js"></script>
+<script src="js/ui.js"></script>
+<div class="main-container">
+<div class="assessment-card">
+<div class="product-header">
+<h1 class="page-title" style="text-align: center; margin-bottom: 30px;">Select all accessories details</h1>
+</div>
+<div class="assessment-body">
+<div class="row between items-center" style="margin-bottom:12px">
+<button class="chip" id="noAccessoriesBtn" type="button">No accessories</button>
+<small class="muted">Add the items you have — each gives a bonus.</small>
+</div>
+<div class="issues-grid" id="accessoriesGrid"></div>
+<div class="page-navigation">
+<a class="nav-button prev" href="#" id="backToIssues">‹</a>
+<div class="final-quote-container">
+<h3 class="hidden">Final Price</h3>
+<p class="final-price hidden" id="finalPrice">₹0</p>
+</div>
+<a class="nav-button next" href="#">Next</a>
+</div>
+</div>
+</div>
+</div>
+<script src="js/accessories.js"></script>
+</body>
+</html>

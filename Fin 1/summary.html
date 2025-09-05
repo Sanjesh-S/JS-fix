@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorthyTen - Summary</title>
+<!-- Font + site CSS -->
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body data-step="8">
+<!-- Reusable header -->
+<div id="header"></div>
+<!-- Progress (paste below header) -->
+<div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
+
+
+
+<script src="js/header.js"></script>
+<script src="js/ui.js"></script>
+<div class="main-container">
+<div class="quote-card summary-card" style="max-width: 900px; margin: 0 auto;">
+<div class="product-header">
+<h1 class="product-title">Your Quote Summary</h1>
+</div>
+<!-- Image + Model name -->
+<div class="summary-header">
+<img alt="Camera" id="sumImage" src="https://via.placeholder.com/250"/>
+<h2 class="model-name" id="sumModel">Model</h2>
+</div>
+<!-- Details list -->
+<div class="summary-grid" id="sumGrid"></div>
+<!-- Final price -->
+<div class="final-quote-display">
+<h3>Final Price</h3>
+<p class="final-price" id="sumPrice">₹0</p>
+<p class="already-sold">We’ll confirm this at pickup after on-spot checks.</p>
+</div>
+<!-- Actions -->
+<div class="summary-actions">
+<a class="nav-button prev" href="index.html">‹ Recalculate</a>
+<a class="cta-button" href="#" id="bookPickupBtn">Book Free Pickup →</a>
+</div>
+</div>
+</div>
+<!-- Sticky CTA (mobile) -->
+<!-- Page logic -->
+<script src="js/summary.js"></script>
+</body>
+</html>

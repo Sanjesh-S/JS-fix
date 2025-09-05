@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorthyTen - Warranty Condition</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body data-step="7">
+<div id="header"></div>
+<!-- Progress (paste below header) -->
+<div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
+
+
+
+<script src="js/header.js"></script>
+<script src="js/ui.js"></script>
+<div class="main-container">
+<div class="warranty-card">
+<div class="evaluating-header">
+<img alt="Camera" class="evaluating-image" id="deviceImage" src="https://via.placeholder.com/80"/>
+<div class="evaluating-details">
+<span class="evaluating-title">Evaluating</span>
+<h1 class="evaluating-device-name" id="deviceName"></h1>
+</div>
+</div>
+<div class="progress-bar-container"><div class="progress-bar-fill"></div></div>
+<div class="breadcrumbs">
+<span>Overall Condition</span> ›
+        <span>Physical Condition</span> ›
+        <span>Functional &amp; Accessories</span> ›
+        <span class="active">Warranty Condition</span>
+</div>
+<div class="warranty-body">
+<h2 class="section-title">Age of the Device</h2>
+<div class="age-options">
+<label class="radio-option">
+<input name="device_age" type="radio" value="under_11"/>
+<span class="radio-label">0-11 Months</span>
+<span class="radio-sublabel">Valid bill mandatory</span>
+</label>
+<label class="radio-option">
+<input checked="" name="device_age" type="radio" value="over_11"/>
+<span class="radio-label">Above 11 Months</span>
+</label>
+</div>
+</div>
+<div aria-live="polite" class="final-quote-display hidden" id="finalQuoteDisplay">
+<h3>Final Price</h3>
+<p class="final-price" id="finalPrice"></p>
+</div>
+<div class="page-navigation">
+<a class="nav-button prev" href="#" id="backToAccessories">‹</a>
+<a class="nav-button next" href="#" id="finishButton">Finish</a>
+</div>
+</div>
+</div>
+<script src="js/warranty.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorthyTen - Physical Condition</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body data-step="4">
+<div id="header"></div>
+<!-- Progress (paste below header) -->
+<div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
+
+
+
+<script src="js/header.js"></script>
+<script src="js/ui.js"></script>
+<div class="main-container">
+<div class="assessment-card">
+<div class="product-header">
+<a class="back-button" href="#" id="backToAssessment">← Back to Assessment</a>
+<h1 class="product-title">Describe the Physical Condition</h1>
+</div>
+<div class="assessment-body">
+<div class="condition-section">
+<h2 class="condition-title">Display Condition</h2>
+<div class="condition-grid" id="displayConditionGrid"></div>
+</div>
+<div class="condition-section">
+<h2 class="condition-title">Body Condition</h2>
+<div class="condition-grid" id="bodyConditionGrid"></div>
+</div>
+<div class="condition-section">
+<h2 class="condition-title">Error Condition</h2>
+<div class="condition-grid" id="errorConditionGrid"></div>
+</div>
+<div class="condition-section">
+<h2 class="condition-title">Lens Condition</h2>
+<div class="condition-grid" id="lensConditionGrid"></div>
+</div>
+<div class="final-quote-container hidden" id="finalQuoteContainer">
+<h3 class="hidden">Your Updated Offer</h3>
+<p class="final-price hidden" id="finalPrice"></p>
+<a class="cta-button" href="#" id="proceedToIssuesBtn">Check Functional Issues →</a>
+</div>
+</div>
+</div>
+</div>
+<script src="js/physical-condition.js"></script>
+</body>
+</html>

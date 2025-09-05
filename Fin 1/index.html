@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorthyTen - Select Camera Brand</title>
+<!-- Urbanist font -->
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons (search icon) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<!-- Site CSS -->
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body data-step="1">
+<div id="header"></div>
+<!-- Progress (paste below header) -->
+<div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
+<script src="js/header.js"></script>
+<script src="js/ui.js"></script>
+<div class="main-container">
+<div class="brand-selection-container" id="brandSelection">
+<div class="search-section">
+<h2 class="search-title">Search for your Camera to sell</h2>
+<div class="search-bar">
+<i class="fa-solid fa-magnifying-glass search-icon"></i>
+<input placeholder="Search for a camera brand or model" type="text"/>
+</div>
+</div>
+<div class="brand-divider"><span class="divider-text">Or choose a brand</span></div>
+<div class="brand-grid">
+<a class="brand-card" data-brand="Canon" href="#"><span class="brand-name">Canon</span></a>
+<a class="brand-card" data-brand="Nikon" href="#"><span class="brand-name">Nikon</span></a>
+<a class="brand-card" data-brand="Sony" href="#"><span class="brand-name">Sony</span></a>
+<a class="brand-card brand-card-logo" data-brand="Fujifilm" href="#">
+<img alt="Fujifilm Logo" class="brand-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Fujifilm_logo.svg/2560px-Fujifilm_logo.svg.png"/>
+</a>
+<a class="brand-card more-brands" href="#"><span class="brand-name">More Brands</span></a>
+</div>
+</div>
+<div class="model-selection-container hidden" id="modelSelection">
+<a class="back-button" href="#" id="backButton">← Back to Brands</a>
+<h1 class="page-title">Sell Your Old <span id="selectedBrandTitle"></span> Camera</h1>
+<div class="model-grid" id="cameraModelsGrid"></div>
+</div>
+</div>
+<script src="js/script.js"></script>
+
+<!-- ================== ADVANCED SECTIONS ================== -->
+<section class="how-works" id="how-it-works">
+<div class="wrap">
+<h2 class="sec-title">How WorthyTen Works</h2>
+<p class="sec-sub">Sell your camera in 3 simple steps</p>
+<div class="steps3">
+<div class="step">
+<div class="num">1</div>
+<h3>Select your device</h3>
+<p>Choose brand and model. Get an instant base price.</p>
+</div>
+<div class="step">
+<div class="num">2</div>
+<h3>Answer a few questions</h3>
+<p>Tell us the condition, issues and accessories. Price updates live.</p>
+</div>
+<div class="step">
+<div class="num">3</div>
+<h3>Get paid fast</h3>
+<p>Pickup from your location. Quick inspection. Money credited same day.</p>
+</div>
+</div>
+<div class="trust-badges">
+<div class="badge"><span class="fi">⏱</span>Same‑day pickup</div>
+<div class="badge"><span class="fi">🛡</span>Verified buyer network</div>
+<div class="badge"><span class="fi">💳</span>Instant payments</div>
+<div class="badge"><span class="fi">⭐</span>4.8/5 rated service</div>
+</div>
+</div>
+</section>
+<section class="reviews" id="reviews">
+<div class="wrap">
+<h2 class="sec-title">Customers love WorthyTen</h2>
+<p class="sec-sub">Real reviews from real sellers</p>
+<div class="review-slider" data-autoplay="true">
+<button aria-label="Previous" class="rev-nav prev">‹</button>
+<div class="slides">
+<article class="review">
+<div class="stars">★★★★★</div>
+<p>“Smooth process. Got better price than offline stores and payment was instant.”</p>
+<div class="author">— Harish, Chennai</div>
+</article>
+<article class="review">
+<div class="stars">★★★★★</div>
+<p>“Pickup on time, polite executive, and they matched the online quote.”</p>
+<div class="author">— Priya, Bangalore</div>
+</article>
+<article class="review">
+<div class="stars">★★★★☆</div>
+<p>“Took 10 minutes to evaluate. Money received before the agent left.”</p>
+<div class="author">— Rohit, Hyderabad</div>
+</article>
+</div>
+<button aria-label="Next" class="rev-nav next">›</button>
+</div>
+</div>
+</section>
+<section class="faq" id="faq">
+<div class="wrap">
+<h2 class="sec-title">Frequently Asked Questions</h2>
+<div class="accordion">
+<details>
+<summary>How is the price calculated?</summary>
+<div class="ans">Your base price is derived from recent market data. As you answer assessment questions, we apply transparent adjustments for condition, issues and accessories.</div>
+</details>
+<details>
+<summary>What about pickup &amp; payment?</summary>
+<div class="ans">We schedule pickup at your convenience. After a quick check, we transfer the amount instantly to your bank/UPI.</div>
+</details>
+<details>
+<summary>Is my data safe?</summary>
+<div class="ans">Yes. We do not resell personal data. Devices are factory‑reset during inspection if requested.</div>
+</details>
+</div>
+</div>
+</section>
+<section class="cta-banner">
+<div class="wrap cta-wrap">
+<h2>Ready to sell your camera?</h2>
+<p>Get a free quote in under a minute.</p>
+<a class="cta-button" href="index.html">Start Now →</a>
+</div>
+</section>
+<footer class="site-footer">
+<div class="wrap foot">
+<div>© <span id="yearNow"></span> WorthyTen. All rights reserved.</div>
+<nav class="foot-links">
+<a href="#how-it-works">How it works</a>
+<a href="#reviews">Reviews</a>
+<a href="#faq">FAQ</a>
+</nav>
+</div>
+</footer>
+  <script src="js/home.js"></script>
+</body>
+</html>
