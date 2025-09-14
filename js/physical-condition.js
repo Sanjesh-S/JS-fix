@@ -1,4 +1,4 @@
-// js/physical-condition.js (v6)
+// js/physical-condition.js (v6 - FIXED)
 document.addEventListener("DOMContentLoaded", () => {
   // Load data
   const s = sessionStorage.getItem('valuationData');
@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Back
   document.getElementById('backToAssessment')?.addEventListener('click', (e) => {
-    e.preventDefault(); history.back();
+    e.preventDefault(); 
+    history.back();
   });
 
   // Where to show the proceed CTA
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { id: 'lense_scratches',   label: 'Scratches',                      img: 'images/lense-scratches.png',     deduction: 0.20 }
     ]
   };
+  
   const selections = { display: null, body: null, error: null, lens: null };
 
   function card(c, cat) {
@@ -54,34 +56,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Gracefully support either #lensConditionGrid or #lenseConditionGrid in your HTML
   function render() {
-  const get = (x) => document.getElementById(x);
-  const set = (el, html) => { if (el) el.innerHTML = html; };
+    const get = (x) => document.getElementById(x);
+    const set = (el, html) => { if (el) el.innerHTML = html; };
 
-  set(get('displayConditionGrid'),
-      conditions.display.map(c => card(c, 'display')).join(''));
+    set(get('displayConditionGrid'),
+        conditions.display.map(c => card(c, 'display')).join(''));
 
-  set(get('bodyConditionGrid'),
-      conditions.body.map(c => card(c, 'body')).join(''));
+    set(get('bodyConditionGrid'),
+        conditions.body.map(c => card(c, 'body')).join(''));
 
-  set(get('errorConditionGrid'),
-      conditions.error.map(c => card(c, 'error')).join(''));
+    set(get('errorConditionGrid'),
+        conditions.error.map(c => card(c, 'error')).join(''));
 
-  const lensEl = get('lensConditionGrid') || get('lenseConditionGrid');
-  set(lensEl, conditions.lens.map(c => card(c, 'lens')).join(''));
+    const lensEl = get('lensConditionGrid') || get('lenseConditionGrid');
+    set(lensEl, conditions.lens.map(c => card(c, 'lens')).join(''));
 
-  // Page-scoped: make sure any step/progress bar on this page doesn't block clicks
-  const scope = document.getElementById('physicalCondition') || document;
-  scope.querySelectorAll('.steps-bar-track, .steps-bar-fill').forEach(el => {
-    try { el.style.pointerEvents = 'none'; } catch(e) {}
-  });
-}
+    // Add click event listeners to all condition cards after rendering
+    document.querySelectorAll('.condition-card').forEach(card => {
+      card.addEventListener('click', handleCardClick);
+    });
+  }
 
   function allChosen() {
     return ['display','body','error','lens'].every(k => selections[k] !== null);
   }
 
   function recalc() {
-    if (!allChosen()) { finalQuoteContainer?.classList.add('hidden'); return; }
+    if (!allChosen()) { 
+      finalQuoteContainer?.classList.add('hidden'); 
+      return; 
+    }
     const total = Object.values(selections).reduce((a,b)=>a+Number(b||0),0);
     const current = basePrice * (1 - total);
     const finalPrice = Math.round(Math.max(current, basePrice * 0.05));
@@ -92,26 +96,47 @@ document.addEventListener("DOMContentLoaded", () => {
     try { window.updateOfferDrawer?.(vd); } catch {}
   }
 
-  // Selection handling
-  document.body.addEventListener('click', (e) => {
-    const el = e.target.closest('.condition-card'); if (!el) return;
-    const cat = el.dataset.category;
-    selections[cat] = parseFloat(el.dataset.deduction);
-    document.querySelectorAll(`.condition-card[data-category="${cat}"]`).forEach(c=>c.classList.remove('selected'));
-    el.classList.add('selected');
-    recalc();
-    // enable/disable next
-    if (proceedBtn) (allChosen() ? proceedBtn.removeAttribute('disabled') : proceedBtn.setAttribute('disabled','disabled'));
-  });
+  function updateProceedButton() {
+    if (!proceedBtn) return;
+    if (allChosen()) {
+      proceedBtn.removeAttribute('disabled');
+    } else {
+      proceedBtn.setAttribute('disabled', 'disabled');
+    }
+  }
 
-  // Next
-  proceedBtn?.addEventListener('click',(e)=>{
+  // Fixed click handler
+  function handleCardClick(e) {
+    const card = e.currentTarget; // Use currentTarget instead of closest
+    const cat = card.dataset.category;
+    const deduction = parseFloat(card.dataset.deduction);
+    
+    // Update selection
+    selections[cat] = deduction;
+    
+    // Remove selected class from all cards in this category
+    document.querySelectorAll(`.condition-card[data-category="${cat}"]`).forEach(c => {
+      c.classList.remove('selected');
+    });
+    
+    // Add selected class to clicked card
+    card.classList.add('selected');
+    
+    // Recalculate and update UI
+    recalc();
+    updateProceedButton();
+  }
+
+  // Next button
+  proceedBtn?.addEventListener('click', (e) => {
     e.preventDefault();
+    if (proceedBtn.hasAttribute('disabled')) return; // Don't proceed if disabled
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
     window.location.href = 'functional-issues.html';
   });
 
+  // Initialize
   render();
   recalc();
-  if (proceedBtn && !allChosen()) proceedBtn.setAttribute('disabled','disabled');
+  updateProceedButton();
 });
