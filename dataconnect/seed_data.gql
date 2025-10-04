@@ -1,0 +1,84 @@
+mutation SeedDatabase @auth(level: USER) {
+  user_upsertMany(data: [
+    {
+      id: "67c3933d-e04a-42c7-b90a-c48b1447b40d",
+      displayName: "Bob User",
+      email: "bob@example.com",
+      bio: "A simple user for testing"
+    },
+    {
+      id: "528b40c1-146c-43f0-9927-939d71e88792",
+      displayName: "Alice Admin",
+      email: "alice@example.com",
+      bio: "An admin user for testing"
+    }
+  ])
+  tag_upsertMany(data: [
+    {
+      id: "e76df29a-9ef2-43f4-b920-41c7a587a738",
+      name: "Tech",
+      description: "Technology related items"
+    },
+    {
+      id: "22f512ba-48fd-471c-80a5-18e83530fd97",
+      name: "Home Goods",
+      description: "Items for the home"
+    }
+  ])
+  item_upsertMany(data: [
+    {
+      id: "0716d8b5-962c-43a3-8a59-6e7ff194fe16",
+      userId: "67c3933d-e04a-42c7-b90a-c48b1447b40d",
+      name: "Smart Watch",
+      description: "A fancy smart watch",
+      status: "Active",
+      priority: 1,
+      isPublic: true
+    },
+    {
+      id: "f623a39a-61a2-45e2-b8d9-9e6c587d5ba2",
+      userId: "528b40c1-146c-43f0-9927-939d71e88792",
+      name: "Coffee Maker",
+      description: "A machine to make coffee",
+      status: "Inactive",
+      priority: 2,
+      isPublic: false
+    }
+  ])
+  itemTag_upsertMany(data: [
+    {
+      itemId: "0716d8b5-962c-43a3-8a59-6e7ff194fe16",
+      tagId: "e76df29a-9ef2-43f4-b920-41c7a587a738"
+    },
+    {
+      itemId: "f623a39a-61a2-45e2-b8d9-9e6c587d5ba2",
+      tagId: "22f512ba-48fd-471c-80a5-18e83530fd97"
+    }
+  ])
+  list_upsertMany(data: [
+    {
+      id: "31b41b2f-2369-464a-8b71-2c05d9ca07f9",
+      userId: "67c3933d-e04a-42c7-b90a-c48b1447b40d",
+      name: "Tech Wishlist",
+      description: "List of desired tech items",
+      isPublic: true
+    },
+    {
+      id: "415607ea-7f1c-477c-9351-550dd16b9771",
+      userId: "528b40c1-146c-43f0-9927-939d71e88792",
+      name: "Home Renovation",
+      description: "Items needed for home improvement",
+      isPublic: false
+    }
+  ])
+  listItem_upsertMany(data: [
+    {
+      listId: "31b41b2f-2369-464a-8b71-2c05d9ca07f9",
+      itemId: "0716d8b5-962c-43a3-8a59-6e7ff194fe16"
+    },
+    {
+      listId: "415607ea-7f1c-477c-9351-550dd16b9771",
+      itemId: "f623a39a-61a2-45e2-b8d9-9e6c587d5ba2"
+    }
+  ])
+}

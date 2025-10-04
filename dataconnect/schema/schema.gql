@@ -1,0 +1,48 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  bio: String
+}
+
+type List @table {
+  user: User!
+  name: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  description: String
+  isPublic: Boolean
+}
+
+type Item @table {
+  user: User!
+  name: String!
+  createdAt: Timestamp!
+  status: String!
+  description: String
+  desiredPrice: Float
+  actualPrice: Float
+  whereToBuy: String
+  notes: String
+  priority: Int
+  imageUrl: String
+  isPublic: Boolean
+}
+
+type ListItem @table(key: ["list", "item"]) {
+  list: List!
+  item: Item!
+  createdAt: Timestamp!
+  specificNotesForList: String
+}
+
+type Tag @table {
+  name: String!
+  description: String
+}
+
+type ItemTag @table(key: ["item", "tag"]) {
+  item: Item!
+  tag: Tag!
+  createdAt: Timestamp!
+}

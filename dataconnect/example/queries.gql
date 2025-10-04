@@ -1,0 +1,24 @@
+mutation CreateTag @auth(level: USER) {
+  tag_insert(data: {name: "New Tag", description: "A new tag"})
+}
+
+query ListPublicLists @auth(level: PUBLIC) {
+  lists(where: {isPublic: {eq: true}}) {
+    id
+    name
+    description
+  }
+}
+
+mutation UpdateItemPriority($itemId: UUID!, $priority: Int!) @auth(level: USER) {
+  item_update(key: {id: $itemId}, data: {priority: $priority})
+}
+
+query GetMyItems @auth(level: USER) {
+  items(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    description
+    status
+  }
+}
