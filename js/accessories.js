@@ -54,12 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
     recalc();
   });
 
-  nextButton.addEventListener('click',(e)=>{
-    e.preventDefault();
+  // No Accessories button handler
+  const noAccessoriesBtn = document.getElementById('noAccessoriesBtn');
+  noAccessoriesBtn?.addEventListener('click', () => {
+    accessoriesGrid.querySelectorAll('.issue-card.selected').forEach(c => c.classList.remove('selected'));
+    selected.clear();
+    noAccessoriesBtn.classList.add('selected');
+    vd.priceAfterAccessories = basePrice; // Reset to base price
+    vd.accessories = [];
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
-    window.location.href = 'warranty.html';
+    recalc();
   });
-
-  render();
-  recalc();
-});

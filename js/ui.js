@@ -27,3 +27,13 @@
     // swallow
   }
 })();
+// Add at the end of js/ui.js
+document.addEventListener('DOMContentLoaded', () => {
+  const step = parseInt(document.body.getAttribute('data-step') || '1');
+  const totalSteps = 8;
+  const percentage = (step / totalSteps) * 100;
+  const fill = document.getElementById('stepsFill');
+  if (fill) {
+    fill.style.width = percentage + '%';
+  }
+});
