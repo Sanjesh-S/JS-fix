@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Admin - Pickups</title></head>
+<body>
+<h2>Pickups (admin)</h2>
+<div id="pickup-list">Loading...</div>
+<script>
+  async function load() {
+    if (typeof firebase === 'undefined' || !firebase.firestore) {
+      document.getElementById('pickup-list').innerText = 'Firebase not loaded.';
+      return;
+    }
+    try {
+      var db = firebase.firestore();
+      var snap = await db.collection('pickups').orderBy('createdAt','desc').get();
+      var list = document.getElementById('pickup-list');
+      list.innerHTML = '';
+      snap.forEach(function(doc){
+        var d = doc.data();
+        var el = document.createElement('div');
+        el.style.padding='8px';
+        el.style.borderBottom='1px solid #eee';
+        el.innerHTML = '<strong>'+ (d.name||'') +'</strong> — ' + (d.contact||'') + '<br>' + (d.address||'') + '<br><em>' + (d.status||'') + '</em>';
+        list.appendChild(el);
+      });
+    } catch (e) {
+      document.getElementById('pickup-list').innerText = 'Error: ' + e.message;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', load);
+</script>
+</body>
+</html>

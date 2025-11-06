@@ -1,13 +1,14 @@
 // js/firebase-config.js
 // CORRECTED CONFIG - Using the actual API key from your Firebase Console
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC4SqbxwKCJmUBNKt85UwEJqNnep9t7qQY",
+  apiKey: "AIzaSyC4SqbxwKCJmUBNKt85UwEJgNnep9t7qOY",
   authDomain: "worthyten-otp-a925d.firebaseapp.com",
   projectId: "worthyten-otp-a925d",
   storageBucket: "worthyten-otp-a925d.firebasestorage.app",
   messagingSenderId: "1067702314639",
-  appId: "1:1067702314639:web:0bb2a3918172bc306572fa",
+  appId: "1:1067702314639:web:0bb2a39181720c306572fa",
   measurementId: "G-WBXQ5SM16Y"
 };
 
@@ -44,4 +45,15 @@ if (window.firebase && typeof window.firebase.initializeApp === "function") {
       window.__FIREBASE_DISABLED = true;
     }
   }
+}
+// Initialize Firebase if not already initialized
+if (typeof firebase !== "undefined" && (!firebase.apps || firebase.apps.length === 0)) {
+  firebase.initializeApp(firebaseConfig);
+  console.log("✅ Firebase initialized successfully");
+
+  // Optional: initialize Firestore right away so you can test
+  const db = firebase.firestore();
+  console.log("✅ Firestore ready:", db);
+} else {
+  console.warn("⚠️ Firebase SDK not loaded yet or already initialized");
 }

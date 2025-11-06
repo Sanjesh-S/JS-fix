@@ -1,12 +1,11 @@
-// js/warranty.js (updated)
-// Requires: js/state-helper.js (optional) and js/login.js (optional for the login modal).
-// Replace the original file with this full contents.
+// js/warranty.js (v3 - CORRECTED)
+// This version fixes the button visibility issue.
 
 document.addEventListener("DOMContentLoaded", () => {
   // Safe read of valuationData
   let vd = null;
   try {
-    if (window.StateHelper && typeof window.StateHelper.safeGetValuationData === 'function') {
+    if (window.StateHelper && typeof window.StateHelper.safeGetValVluationData === 'function') {
       vd = window.StateHelper.safeGetValuationData();
     } else {
       const dataStr = sessionStorage.getItem("valuationData");
@@ -27,16 +26,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // DOM elements (keep ids/classes same as your markup)
+  // DOM elements
   const img = document.getElementById("deviceImage");
   const nameEl = document.getElementById("deviceName");
   const finalEl = document.getElementById("finalPrice");
   const finalBox = document.getElementById("finalQuoteDisplay");
   const finishBtn = document.getElementById("finishButton");
   const ageRadios = document.querySelectorAll('input[name="device_age"]');
+  const finalPriceLabel = finalBox ? finalBox.querySelector('h3') : null;
 
-  // If finalBox exists, hide it initially so price won't show until verification
-  if (finalBox) finalBox.classList.add("hidden");
+  // ===================================================
+  // THE FIX:
+  // 1. Show the main box (so the button is visible)
+  // 2. Hide the price elements (until verification)
+  // ===================================================
+  if (finalBox) finalBox.classList.remove("hidden"); // <-- THIS IS THE NEW LINE
+  if (finalPriceLabel) finalPriceLabel.classList.add("hidden");
+  if (finalEl) finalEl.classList.add("hidden");
+  // ===================================================
 
   // Fill basic UI
   if (img && vd.imageUrl) img.src = vd.imageUrl;
@@ -57,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
     try { window.updateOfferDrawer?.(vd); } catch {}
   }
 
-  // Recalculate when age option changes (still calculate internally but keep finalBox hidden until verified)
+  // Recalculate when age option changes
   ageRadios.forEach(r => r.addEventListener("change", calcFinal));
 
-  // Two-step confirm - but require verification BEFORE showing price
+  // Two-step confirm
   let armed = false;
 
   // Helper: check session verification flag
@@ -72,10 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Helper: show final box (unhide and set armed state)
+  // Helper: show final price elements
   function revealFinalAndArm() {
     calcFinal(); // ensure price is up-to-date
-    if (finalBox) finalBox.classList.remove("hidden");
+    
+    // Show the price elements
+    if (finalPriceLabel) finalPriceLabel.classList.remove("hidden");
+    if (finalEl) finalEl.classList.remove("hidden");
+
     if (finishBtn) finishBtn.textContent = "Confirm Order";
     armed = true;
     try { window.showToast?.('Review final price, then confirm.'); } catch {}
@@ -122,15 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn('warranty.js: finish button (#finishButton) not found.');
   }
 
-  // Back button (if present)
-  const backBtn = document.getElementById("backToAccessories");
-  if (backBtn) {
-    backBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      history.back();
-    });
-  }
-
-  // init - run initial calc (but finalBox stays hidden until verified)
+  // init - run initial calc (but price stays hidden)
   calcFinal();
 });

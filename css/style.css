@@ -689,3 +689,104 @@ input::placeholder{ color:#9aa1ac }
     padding: 16px;
   }
 }
+/* ---------- Pickup Modal Styles ---------- */
+
+.pickup-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pickup-modal-content {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.pickup-modal-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #111;
+  text-align: center;
+}
+
+.pickup-modal-title.success {
+  color: var(--brand-2);
+}
+
+.pickup-modal-subtitle {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f5f5f5;
+  border: 1px solid rgba(0,0,0,.10);
+  color: var(--text);
+  font-family: 'Urbanist', sans-serif;
+  font-size: 16px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+textarea.form-input {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.pickup-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.pickup-modal-actions .nav-button.prev {
+  background: #eee;
+  color: #333;
+  border: none;
+  box-shadow: none;
+}
+
+#modalStep2_Confirm .pickup-modal-actions {
+  justify-content: center;
+}

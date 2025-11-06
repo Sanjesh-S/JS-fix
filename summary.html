@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>WorthyTen - Summary</title>
-<!-- Font + site CSS -->
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
+
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script defer src="js/firebase-config.js"></script>
+
 </head>
 <body data-step="8">
-<!-- Reusable header -->
 <div id="header"></div>
-<!-- Progress (paste below header) -->
 <div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
-
-
 
 <script src="js/header.js"></script>
 <script src="js/ui.js"></script>
@@ -24,29 +24,69 @@
 <div class="product-header">
 <h1 class="product-title">Your Quote Summary</h1>
 </div>
-<!-- Image + Model name -->
 <div class="summary-header">
 <img alt="Camera" id="sumImage" src="https://via.placeholder.com/250"/>
 <h2 class="model-name" id="sumModel">Model</h2>
 </div>
-<!-- Details list -->
 <div class="summary-grid" id="sumGrid"></div>
-<!-- Final price -->
 <div class="final-quote-display">
 <h3>Final Price</h3>
 <p class="final-price" id="sumPrice">₹0</p>
 <p class="already-sold">We’ll confirm this at pickup after on-spot checks.</p>
 </div>
-<!-- Actions -->
 <div class="summary-actions">
 <a class="nav-button prev" href="index.html">‹ Recalculate</a>
 <a class="cta-button" href="#" id="bookPickupBtn">Book Free Pickup →</a>
 </div>
 </div>
 </div>
-<!-- Sticky CTA (mobile) -->
-<!-- Page logic -->
 <script src="js/state-helper.js"></script>
 <script src="js/summary.js"></script>
+
+
+<div class="pickup-modal-backdrop" id="pickupModal" style="display:none;">
+  <div class="pickup-modal-content">
+    
+    <div id="modalStep1_Form">
+      <h2 class="pickup-modal-title">Enter Pickup Details</h2>
+      <p class="pickup-modal-subtitle">Please provide your details for our agent.</p>
+      
+      <form id="pickupForm">
+        <div class="form-group">
+          <label for="custName">Full Name</label>
+          <input type="text" id="custName" class="form-input" placeholder="Enter your name" required />
+        </div>
+        <div class="form-group">
+          <label for="custAddress">Full Address</label>
+          <textarea id="custAddress" class="form-input" placeholder="Enter your full pickup address" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="custPhone">Contact Number</label>
+          <input type="tel" id="custPhone" class="form-input" placeholder="Enter your 10-digit number" required />
+        </div>
+        <div class="form-group">
+          <label for="custAltPhone">Alternate Number (Optional)</label>
+          <input type="tel" id="custAltPhone" class="form-input" placeholder="Optional" />
+        </div>
+        
+        <div class="pickup-modal-actions">
+          <button type="button" id="cancelPickupBtn" class="nav-button prev">Cancel</button>
+          <button type="submit" id="submitPickupBtn" class="cta-button">Confirm Pickup</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="modalStep2_Confirm" style="display:none;">
+      <h2 class="pickup-modal-title success">Thank You!</h2>
+      <p class="pickup-modal-subtitle" style="font-size: 1.1rem; line-height: 1.6;">Your pickup request has been booked successfully.</p>
+      <p style="color:#666; text-align:center;">Our agent will reach out to you shortly to confirm the pickup time.</p>
+      <div class="pickup-modal-actions">
+        <button type="button" id="closeConfirmBtn" class="cta-button">Done</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
