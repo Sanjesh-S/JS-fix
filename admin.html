@@ -1,33 +1,104 @@
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Admin - Pickups</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorthyTen - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <style>
+        /* Styles for the admin page */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: var(--bg-soft);
+        }
+        .admin-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 1px solid var(--brand);
+            background: #fff;
+            color: var(--brand);
+        }
+        .logout-btn:hover {
+            background: var(--brand);
+            color: #fff;
+        }
+        .pickup-table-container {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 700;
+        }
+        tr:hover {
+            background-color: #fdfdfd;
+        }
+        .status-new {
+            font-weight: 700;
+            color: var(--ok);
+        }
+        .details-col {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .details-col strong {
+            color: #000;
+        }
+    </style>
+</head>
 <body>
-<h2>Pickups (admin)</h2>
-<div id="pickup-list">Loading...</div>
-<script>
-  async function load() {
-    if (typeof firebase === 'undefined' || !firebase.firestore) {
-      document.getElementById('pickup-list').innerText = 'Firebase not loaded.';
-      return;
-    }
-    try {
-      var db = firebase.firestore();
-      var snap = await db.collection('pickups').orderBy('createdAt','desc').get();
-      var list = document.getElementById('pickup-list');
-      list.innerHTML = '';
-      snap.forEach(function(doc){
-        var d = doc.data();
-        var el = document.createElement('div');
-        el.style.padding='8px';
-        el.style.borderBottom='1px solid #eee';
-        el.innerHTML = '<strong>'+ (d.name||'') +'</strong> — ' + (d.contact||'') + '<br>' + (d.address||'') + '<br><em>' + (d.status||'') + '</em>';
-        list.appendChild(el);
-      });
-    } catch (e) {
-      document.getElementById('pickup-list').innerText = 'Error: ' + e.message;
-    }
-  }
-  document.addEventListener('DOMContentLoaded', load);
-</script>
+
+    <div class="admin-header">
+        <h1>Pickup Requests</h1>
+        <button id="logout-button" class="logout-btn">Logout</button>
+    </div>
+    
+    <div class="pickup-table-container">
+        <table id="pickup-table">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Device</th>
+                    <th>Price</th>
+                    <th>Slot</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="pickup-list-body">
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 20px;">Loading requests...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    
+    <script defer src="js/firebase-config.js"></script>
+    <script defer src="js/admin-dashboard.js"></script>
+
 </body>
 </html>

@@ -194,11 +194,21 @@ a:hover{opacity:.9}
   border-color: rgba(0,0,0,.15);
   transform: translateY(-2px);
 }
+
+/* =================================================== */
+/* FIXED STYLE HERE                     */
+/* =================================================== */
 .condition-card.selected{ 
-  box-shadow: 0 0 0 3px var(--ring);
-  background: #f8fffe;
-  border-color: var(--brand-2);
+  background: linear-gradient(90deg, #48e1a7, #a6fbd4); 
+  color:#0a0f20; 
+  border-color:transparent;
+  box-shadow: 0 4px 12px rgba(72, 225, 167, 0.25);
 }
+.condition-card.selected .condition-label {
+  color: #0a0f20;
+}
+/* =================================================== */
+
 .condition-image {
   width: 60px;
   height: 60px;
@@ -224,7 +234,21 @@ a:hover{opacity:.9}
   border-color: rgba(0,0,0,.15);
   transform: translateY(-2px);
 }
-.issue-card.selected{ box-shadow: 0 0 0 3px rgba(245,166,35,.35) }
+
+/* =================================================== */
+/* FIXED STYLE HERE                     */
+/* =================================================== */
+.issue-card.selected{ 
+  background: linear-gradient(90deg, #48e1a7, #a6fbd4); 
+  color:#0a0f20; 
+  border-color:transparent;
+  box-shadow: 0 4px 12px rgba(72, 225, 167, 0.25);
+}
+.issue-card.selected .issue-label {
+  color: #0a0f20;
+}
+/* =================================================== */
+
 .issue-image {
   width: 80px;
   height: 80px;
@@ -305,12 +329,17 @@ a:hover{opacity:.9}
   border-color: rgba(0,0,0,.15);
 }
 
+/* =================================================== */
+/* FIXED STYLE HERE                     */
+/* =================================================== */
 .chip.selected {
-  background: linear-gradient(90deg, var(--brand), var(--brand-2));
-  color: #ffffff;
+  background: linear-gradient(90deg, #48e1a7, #a6fbd4);
+  color: #0a0f20;
   border-color: transparent;
-  box-shadow: 0 4px 12px rgba(27, 76, 135, 0.25);
+  box-shadow: 0 4px 12px rgba(72, 225, 167, 0.25);
 }
+/* =================================================== */
+
 
 /* Make sure muted text aligns properly */
 .muted {
@@ -389,7 +418,8 @@ a:hover{opacity:.9}
   display:inline-flex; gap:8px; align-items:center; padding:8px 12px;
   border-radius:999px; border:1px solid rgba(0,0,0,.10); background:#fff;
 }
-.accessory-chip.selected{ box-shadow: 0 0 0 3px rgba(255,62,158,.25) }
+/* This style was not used and confusing, so I removed it. .issue-card.selected is used instead. */
+/* .accessory-chip.selected{ box-shadow: 0 0 0 3px rgba(255,62,158,.25) } */
 
 /* ---------- Final Quote Box ---------- */
 .final-quote-container{
@@ -789,4 +819,194 @@ textarea.form-input {
 
 #modalStep2_Confirm .pickup-modal-actions {
   justify-content: center;
+}
+/* ---------- NEW: Multi-Step Pickup Modal Styles ---------- */
+
+.pickup-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+}
+.pickup-modal-close:hover {
+  color: #000;
+}
+
+.pickup-modal-actions .nav-button.prev {
+  background: #eee;
+  color: #333;
+  border: none;
+  box-shadow: none;
+}
+
+/* Slot Selector for Date/Time */
+.slot-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.slot-option {
+  display: block;
+  position: relative;
+}
+
+.slot-option input[type="radio"] {
+  display: none; /* Hide the actual radio button */
+}
+
+.slot-option label {
+  display: block;
+  padding: 12px 10px;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.slot-option label:hover {
+  background: #f8f9fa;
+  border-color: rgba(0,0,0,.15);
+}
+
+.slot-option input[type="radio"]:checked + label {
+  background: linear-gradient(90deg, #48e1a7, #a6fbd4);
+  color: #0a0f20;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(72, 225, 167, 0.25);
+}
+
+.slot-option label .slot-day {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Step 3: Confirmation Box */
+.summary-review-box {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.summary-review-box hr {
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  margin: 12px 0;
+}
+.summary-review-box div {
+  margin-bottom: 4px;
+}
+.summary-review-box div strong {
+  display: inline-block;
+  width: 70px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.summary-review-box div span {
+  font-weight: 600;
+  color: #111;
+}
+/* ---------- NEW: City Selector Popup Styles ---------- */
+
+#custCityTrigger {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23888'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+}
+
+.city-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000; /* Higher than the pickup modal */
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.city-popup-content {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 450px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+.city-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.city-popup-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.city-popup-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.city-popup-close:hover {
+  color: #000;
+}
+
+.city-popup-search {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.city-popup-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 20px;
+  overflow-y: auto;
+  flex-grow: 1; /* Makes the list scrollable */
+}
+
+.city-popup-list li {
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.city-popup-list li:hover {
+  background-color: #f8f9fa;
+  color: var(--brand);
+}
+
+.city-popup-list li:last-child {
+  border-bottom: none;
 }

@@ -1,9 +1,7 @@
-// js/firebase-config.js
-// CORRECTED CONFIG - Using the actual API key from your Firebase Console
+// js/firebase-config.js (CLEANED)
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC4SqbxwKCJmUBNKt85UwEJgNnep9t7qOY",
+  apiKey: "AIzaSyAy1CAxcuIM929hwb6dn1wA6umUJM3LP-4",
   authDomain: "worthyten-otp-a925d.firebaseapp.com",
   projectId: "worthyten-otp-a925d",
   storageBucket: "worthyten-otp-a925d.firebasestorage.app",
@@ -33,6 +31,7 @@ if (validateFirebaseConfig(firebaseConfig)) {
 }
 
 // Auto-init if compat SDK loaded
+// This is the ONLY initialization block.
 if (window.firebase && typeof window.firebase.initializeApp === "function") {
   if (!window.firebase.apps || window.firebase.apps.length === 0) {
     try {
@@ -44,16 +43,9 @@ if (window.firebase && typeof window.firebase.initializeApp === "function") {
       console.error("❌ Firebase initialization error:", error.code, error.message);
       window.__FIREBASE_DISABLED = true;
     }
+  } else {
+    console.log("Firebase already initialized.");
   }
-}
-// Initialize Firebase if not already initialized
-if (typeof firebase !== "undefined" && (!firebase.apps || firebase.apps.length === 0)) {
-  firebase.initializeApp(firebaseConfig);
-  console.log("✅ Firebase initialized successfully");
-
-  // Optional: initialize Firestore right away so you can test
-  const db = firebase.firestore();
-  console.log("✅ Firestore ready:", db);
 } else {
-  console.warn("⚠️ Firebase SDK not loaded yet or already initialized");
+  console.warn("⚠️ Firebase SDK not loaded yet.");
 }

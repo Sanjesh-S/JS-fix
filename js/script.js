@@ -126,6 +126,13 @@ const cameraModelsGrid = document.getElementById("cameraModelsGrid");
 const brandCards = document.querySelectorAll(".brand-card");
 const backButton = document.getElementById("backButton");
 
+// ===================================================
+// NEW: Search Input Element
+// ===================================================
+const searchInput = document.getElementById("search-input");
+// ===================================================
+
+
 // ===== BRAND CARD CLICK =====
 brandCards.forEach(card => {
     card.addEventListener("click", function (event) {
@@ -137,6 +144,7 @@ brandCards.forEach(card => {
                 selectedBrandTitle.textContent = brand;
                 displayCameraModels(brand);
                 modelSelectionContainer.classList.remove("hidden");
+                searchInput.value = ''; // Clear search
             }, 300);
         }
     });
@@ -169,6 +177,48 @@ if (backButton) {
         modelSelectionContainer.classList.add("hidden");
         setTimeout(() => {
             brandSelectionContainer.classList.remove("hidden");
+            searchInput.value = ''; // Clear search
+            handleSearch(); // Re-filter brands
         }, 300);
     });
 }
+
+// ===================================================
+// NEW: Search Functionality
+// ===================================================
+
+function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    
+    // Check which view is active
+    const isBrandView = !brandSelectionContainer.classList.contains("hidden");
+
+    if (isBrandView) {
+        // Filter Brands
+        brandCards.forEach(card => {
+            const brandName = (card.getAttribute("data-brand") || "").toLowerCase();
+            if (brandName.includes(searchTerm)) {
+                card.classList.remove("hidden");
+            } else {
+                card.classList.add("hidden");
+            }
+        });
+    } else {
+        // Filter Models
+        const modelCards = cameraModelsGrid.querySelectorAll(".model-card");
+        modelCards.forEach(card => {
+            const modelName = (card.querySelector(".model-name").textContent || "").toLowerCase();
+            if (modelName.includes(searchTerm)) {
+                card.classList.remove("hidden");
+            } else {
+                card.classList.add("hidden");
+            }
+        });
+    }
+}
+
+// Attach the event listener to the search input
+if (searchInput) {
+    searchInput.addEventListener('input', handleSearch);
+}
+// ===================================================

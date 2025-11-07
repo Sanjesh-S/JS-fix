@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>WorthyTen - Admin Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="header"></div>
+    <script src="js/header.js"></script>
+
+    <div class="main-container">
+        <div class="assessment-card" style="max-width: 500px; margin: 40px auto;">
+            <div class="assessment-body">
+                <h1 class="product-title" style="text-align: center;">Admin Login</h1>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="admin-email">Email</label>
+                        <input type="email" id="admin-email" class="form-input" placeholder="Enter your email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" class="form-input" placeholder="Enter your password" required />
+                    </div>
+                    
+                    <p id="login-error" style="color: var(--danger); display: none; text-align: center;"></p>
+
+                    <div class="pickup-modal-actions" style="justify-content: center;">
+                        <button type="submit" id="login-button" class="cta-button">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    
+    <script defer src="js/firebase-config.js"></script>
+    <script defer src="js/admin-login.js"></script>
+</body>
+</html>
