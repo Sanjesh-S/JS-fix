@@ -1,224 +1,231 @@
-// ===== CAMERA MODELS DATA (V4 - PERMANENT GOOGLE HOSTING) =====
-const CAMERA_MODELS = {
+// js/script.js (NEW VERSION - CATEGORY-FIRST FLOW)
+
+// ===================================================
+// YOUR NEW PRODUCT DATABASE
+// ===================================================
+// You can add all your products here, organized by category and brand.
+const PRODUCT_DATA = {
+  "DSLR Cameras": {
     "Canon": [
-        // EOS R (RF mount) mirrorless
-        { name: "Canon EOS R3", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r3.png" },
-        { name: "Canon EOS R5", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r5.png" },
-        { name: "Canon EOS R6 Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r6-mark-ii.png" },
-        { name: "Canon EOS R7", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r7.png" },
-        { name: "Canon EOS R8", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r8.png" },
-        { name: "Canon EOS R10", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r10.png" },
-        { name: "Canon EOS R50", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r50.png" },
-        { name: "Canon EOS R100", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r100.png" },
-        { name: "Canon EOS RP", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-rp.png" },
-        { name: "Canon EOS R", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r.png" },
-
-        // EOS DSLR (EF mount)
-        { name: "Canon EOS-1D X Mark III", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-1d-x-mark-iii.png" },
-        { name: "Canon EOS 5D Mark IV", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-5d-mark-iv.png" },
-        { name: "Canon EOS 6D Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-6d-mark-ii.png" },
-        { name: "Canon EOS 7D Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-7d-mark-ii.png" },
-        { name: "Canon EOS 90D", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-90d.png" },
-        { name: "Canon EOS 850D / Rebel T8i", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-850d.png" },
-        { name: "Canon EOS 700D / Rebel T5i", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-700d.png" },
-        { name: "Canon EOS 600D / Rebel T3i", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-600d.png" },
-        { name: "Canon EOS 200D Mark II / Rebel SL3", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-200d-mark-ii.png" },
-        { name: "Canon EOS 100D / Rebel SL1", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-100d.png" },
-        { name: "Canon EOS 2000D / Rebel T7", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-2000d.png" },
-        { name: "Canon EOS 4000D", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-4000d.png" },
-
-        // EOS M (EF-M mount) mirrorless
-        { name: "Canon EOS M50 Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-m50-mark-ii.png" },
-        { name: "Canon EOS M6 Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-m6-mark-ii.png" },
-        { name: "Canon EOS M5", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-m5.png" },
-
-        // PowerShot (compact)
-        { name: "Canon PowerShot G7 X Mark III", image: "https://storage.googleapis.com/gemini-camera-images/powershot-g7-x-mark-iii.png" },
-        { name: "Canon PowerShot G5 X Mark II", image: "https://storage.googleapis.com/gemini-camera-images/powershot-g5-x-mark-ii.png" }
+        { name: "Canon EOS R3", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r3.png", price: 450000 },
+        { name: "Canon EOS R5", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r5.png", price: 280000 },
+        { name: "Canon EOS R6 Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r6-mark-ii.png", price: 190000 },
+        { name: "Canon EOS 100D / Rebel SL1", image: "https://firebasestorage.googleapis.com/v0/b/worthyten-otp-a925d.appspot.com/o/camera_images%2Fcanon-eos-100d.png?alt=media&token=5e0f204e-e680-47e5-b473-bb99e5f4cd06", price: 19000 },
+        { name: "Canon EOS 600D / Rebel T3i", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-600d.png", price: 18000 },
     ],
-
     "Nikon": [
-        // Z-mount mirrorless
-        { name: "Nikon Z9", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z9.png" },
-        { name: "Nikon Z8", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z8.png" },
-        { name: "Nikon Z7 II", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z7-ii.png" },
-        { name: "Nikon Z6 II", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z6-ii.png" },
-        { name: "Nikon Zf", image: "https://storage.googleapis.com/gemini-camera-images/nikon-zf.png" },
-        { name: "Nikon Z fc", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z-fc.png" },
-        { name: "Nikon Z5", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z5.png" },
-        { name: "Nikon Z50", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z50.png" },
-        { name: "Nikon Z30", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z30.png" },
-
-        // F-mount DSLR
-        { name: "Nikon D6", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d6.png" },
-        { name: "Nikon D850", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d850.png" },
-        { name: "Nikon D780", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d780.png" },
-        { name: "Nikon D500", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d500.png" },
-        { name: "Nikon D7500", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d7500.png" },
-        { name: "Nikon D5600", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d5600.png" },
-        { name: "Nikon D3500", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d3500.png" }
+        { name: "Nikon Z9", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z9.png", price: 470000 },
+        { name: "Nikon Z8", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z8.png", price: 310000 },
+        { name: "Nikon D850", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d850.png", price: 180000 },
     ],
-
     "Sony": [
-        // Full-frame Alpha (E-mount)
-        { name: "Sony a1", image: "https://storage.googleapis.com/gemini-camera-images/sony-a1.png" },
-        { name: "Sony a9 III", image: "https://storage.googleapis.com/gemini-camera-images/sony-a9-iii.png" },
-        { name: "Sony a7R V", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7r-v.png" },
-        { name: "Sony a7 IV", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7-iv.png" },
-        { name: "Sony a7C II", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7c-ii.png" },
-        { name: "Sony a7S III", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7s-iii.png" },
-
-        // APS-C Alpha (E-mount)
-        { name: "Sony a6700", image: "https://storage.googleapis.com/gemini-camera-images/sony-a6700.png" },
-        { name: "Sony a6400", image: "https://storage.googleapis.com/gemini-camera-images/sony-a6400.png" },
-        { name: "Sony a6000", image: "https://storage.googleapis.com/gemini-camera-images/sony-a6000.png" },
-
-        // Vlog / ZV series
-        { name: "Sony ZV-E10", image: "https://storage.googleapis.com/gemini-camera-images/sony-zv-e10.png" },
-        { name: "Sony ZV-1 II", image: "https://storage.googleapis.com/gemini-camera-images/sony-zv-1-ii.png" },
-
-        // RX / Cyber-shot compacts
-        { name: "Sony RX100 VII", image: "https://storage.googleapis.com/gemini-camera-images/sony-rx100-vii.png" }
+        { name: "Sony a7R V", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7r-v.png", price: 300000 },
+        { name: "Sony a7 IV", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7-iv.png", price: 180000 },
     ],
-
     "Fujifilm": [
-        // X Series
-        { name: "Fujifilm X-T5", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-t5.png" },
-        { name: "Fujifilm X-H2S", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-h2s.png" },
-        { name: "Fujifilm X-S20", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-s20.png" },
-        { name: "Fujifilm X-Pro3", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-pro3.png" },
-        { name: "Fujifilm X-T30 II", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-t30-ii.png" },
-
-        // Fixed-lens premium
-        { name: "Fujifilm X100VI", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x100vi.png" },
-
-        // Medium format GFX
-        { name: "Fujifilm GFX100 II", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-gfx100-ii.png" }
+        { name: "Fujifilm X-T5", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-t5.png", price: 140000 },
     ],
-    
-    "Panasonic": [
-        // Full-frame S series
-        { name: "Panasonic Lumix S5 II", image: "https://storage.googleapis.com/gemini-camera-images/panasonic-lumix-s5-ii.png" },
-
-        // Micro Four Thirds G/GH series
-        { name: "Panasonic Lumix GH6", image: "https://storage.googleapis.com/gemini-camera-images/panasonic-lumix-gh6.png" },
-        { name: "Panasonic Lumix G9 II", image: "https://storage.googleapis.com/gemini-camera-images/panasonic-lumix-g9-ii.png" }
-    ],
-
-    "Leica": [
-        { name: "Leica M11", image: "https://storage.googleapis.com/gemini-camera-images/leica-m11.png" },
-        { name: "Leica Q3", image: "https://storage.googleapis.com/gemini-camera-images/leica-q3.png" },
-        { name: "Leica SL2", image: "https://storage.googleapis.com/gemini-camera-images/leica-sl2.png" }
-    ],
-
     "GoPro": [
-        { name: "GoPro HERO 12 Black", image: "https://storage.googleapis.com/gemini-camera-images/gopro-hero12-black.png" },
-        { name: "GoPro HERO 11 Black", image: "https://storage.googleapis.com/gemini-camera-images/gopro-hero11-black.png" },
-        { name: "GoPro MAX", image: "https://storage.googleapis.com/gemini-camera-images/gopro-max.png" }
+        { name: "GoPro HERO 12 Black", image: "https://storage.googleapis.com/gemini-camera-images/gopro-hero12-black.png", price: 38000 },
+    ],
+    "Panasonic": [
+        { name: "Panasonic Lumix S5 II", image: "https://storage.googleapis.com/gemini-camera-images/panasonic-lumix-s5-ii.png", price: 160000 },
     ]
+  },
+  "Smartphones": {
+    "Apple": [
+      { name: "iPhone 15 Pro", image: "https://example.com/img.png", price: 90000 },
+      { name: "iPhone 14", image: "https://example.com/img.png", price: 55000 },
+    ],
+    "Samsung": [
+      { name: "Galaxy S23 Ultra", image: "https://example.com/img.png", price: 80000 },
+    ]
+  },
+  "Laptops & Macs": {
+    "Apple": [
+      { name: "MacBook Pro 14 (M3)", image: "https://example.com/img.png", price: 150000 },
+    ],
+    "Dell": [
+      { name: "XPS 15", image: "https://example.com/img.png", price: 110000 },
+    ]
+  }
 };
+// ===================================================
+
 
 // ===== DOM ELEMENTS =====
-const brandSelectionContainer = document.getElementById("brandSelection");
-const modelSelectionContainer = document.getElementById("modelSelection");
-const selectedBrandTitle = document.getElementById("selectedBrandTitle");
-const cameraModelsGrid = document.getElementById("cameraModelsGrid");
-const brandCards = document.querySelectorAll(".brand-card");
-const backButton = document.getElementById("backButton");
-
-// ===================================================
-// NEW: Search Input Element
-// ===================================================
 const searchInput = document.getElementById("search-input");
-// ===================================================
+const dividerText = document.getElementById("divider-text");
 
+const categorySelection = document.getElementById("category-selection");
+const brandSelection = document.getElementById("brand-selection");
+const modelSelection = document.getElementById("model-selection");
 
-// ===== BRAND CARD CLICK =====
-brandCards.forEach(card => {
-    card.addEventListener("click", function (event) {
-        event.preventDefault();
-        const brand = this.getAttribute("data-brand");
-        if (brand && CAMERA_MODELS[brand]) {
-            brandSelectionContainer.classList.add("hidden");
-            setTimeout(() => {
-                selectedBrandTitle.textContent = brand;
-                displayCameraModels(brand);
-                modelSelectionContainer.classList.remove("hidden");
-                searchInput.value = ''; // Clear search
-            }, 300);
-        }
+const categoryGrid = document.getElementById("category-grid");
+const brandGrid = document.getElementById("brand-grid");
+const modelGrid = document.getElementById("model-grid");
+
+const selectedCategoryTitle = document.getElementById("selected-category-title");
+const selectedBrandTitle = document.getElementById("selected-brand-title");
+
+const backToCategoriesBtn = document.getElementById("back-to-categories");
+const backToBrandsBtn = document.getElementById("back-to-brands");
+
+// Store the currently selected category and brand
+let currentCategory = null;
+let currentBrand = null;
+
+// ===== NAVIGATION & DISPLAY LOGIC =====
+
+// Show/Hide sections
+function showSection(sectionToShow) {
+  [categorySelection, brandSelection, modelSelection].forEach(section => {
+    section.classList.add("hidden");
+  });
+  sectionToShow.classList.remove("hidden");
+}
+
+// 1. Populate Categories (On Page Load)
+function populateCategories() {
+  categoryGrid.innerHTML = "";
+  Object.keys(PRODUCT_DATA).forEach(categoryName => {
+    // You can add specific icons here if you want
+    const cardHTML = `
+      <a href="#" class="brand-card" data-category="${categoryName}">
+        <span class="brand-name">${categoryName}</span>
+      </a>
+    `;
+    categoryGrid.innerHTML += cardHTML;
+  });
+
+  // Add click listeners to the new category cards
+  categoryGrid.querySelectorAll('.brand-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentCategory = card.getAttribute('data-category');
+      selectedCategoryTitle.textContent = currentCategory;
+      dividerText.textContent = "Or choose a brand";
+      
+      populateBrands(currentCategory);
+      showSection(brandSelection);
+      searchInput.value = ''; // Clear search
+      searchInput.placeholder = "Search for a brand or model";
     });
+  });
+}
+
+// 2. Populate Brands (When a category is clicked)
+function populateBrands(categoryName) {
+  brandGrid.innerHTML = "";
+  const brands = Object.keys(PRODUCT_DATA[categoryName]);
+  
+  brands.forEach(brandName => {
+    const cardHTML = `
+      <a href="#" class="brand-card" data-brand="${brandName}">
+        <span class="brand-name">${brandName}</span>
+      </a>
+    `;
+    brandGrid.innerHTML += cardHTML;
+  });
+
+  // Add click listeners to the new brand cards
+  brandGrid.querySelectorAll('.brand-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentBrand = card.getAttribute('data-brand');
+      selectedBrandTitle.textContent = currentBrand;
+      dividerText.textContent = "Or choose a model";
+      
+      populateModels(currentCategory, currentBrand);
+      showSection(modelSelection);
+      searchInput.value = ''; // Clear search
+      searchInput.placeholder = "Search for a model";
+    });
+  });
+}
+
+// 3. Populate Models (When a brand is clicked)
+function populateModels(categoryName, brandName) {
+  modelGrid.innerHTML = "";
+  const models = PRODUCT_DATA[categoryName][brandName];
+  
+  models.forEach(model => {
+    const cardHTML = `
+      <a href="quote.html?model=${encodeURIComponent(model.name)}&brand=${encodeURIComponent(brandName)}&image=${encodeURIComponent(model.image)}&price=${encodeURIComponent(model.price)}" class="model-card" title="${model.name}">
+        <img src="${model.image}" alt="${model.name}" class="model-image" loading="lazy">
+        <span class="model-name">${model.name}</span>
+      </a>
+    `;
+    modelGrid.innerHTML += cardHTML;
+  });
+}
+
+// ===== BACK BUTTONS =====
+backToCategoriesBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  currentCategory = null;
+  dividerText.textContent = "Or choose a category";
+  showSection(categorySelection);
+  searchInput.value = '';
+  searchInput.placeholder = "Search for a brand or model";
+  handleSearch(); // Re-show all categories
 });
 
-// ===== DISPLAY MODELS =====
-function displayCameraModels(brand) {
-    cameraModelsGrid.innerHTML = "";
-    const models = CAMERA_MODELS[brand] || [];
+backToBrandsBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  currentBrand = null;
+  dividerText.textContent = "Or choose a brand";
+  showSection(brandSelection);
+  searchInput.value = '';
+  searchInput.placeholder = "Search for a brand or model";
+  handleSearch(); // Re-show all brands
+});
 
-    // Sort alphabetically
-    const sorted = models.slice().sort((a, b) => a.name.localeCompare(b.name));
 
-    sorted.forEach(model => {
-        // Pass the new image URL in the query parameter
-        const cardHTML = `
-            <a href="quote.html?model=${encodeURIComponent(model.name)}&brand=${encodeURIComponent(brand)}&image=${encodeURIComponent(model.image)}" class="model-card" title="${model.name}">
-                <img src="${model.image}" alt="${model.name}" class="model-image" loading="lazy">
-                <span class="model-name">${model.name}</span>
-            </a>
-        `;
-        cameraModelsGrid.innerHTML += cardHTML;
-    });
-}
-
-// ===== BACK BUTTON =====
-if (backButton) {
-    backButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        modelSelectionContainer.classList.add("hidden");
-        setTimeout(() => {
-            brandSelectionContainer.classList.remove("hidden");
-            searchInput.value = ''; // Clear search
-            handleSearch(); // Re-filter brands
-        }, 300);
-    });
-}
-
-// ===================================================
-// NEW: Search Functionality
-// ===================================================
+// ===== SEARCH LOGIC (Updated) =====
 
 function handleSearch() {
+    if (!searchInput) return; 
     const searchTerm = searchInput.value.toLowerCase();
-    
-    // Check which view is active
-    const isBrandView = !brandSelectionContainer.classList.contains("hidden");
 
-    if (isBrandView) {
-        // Filter Brands
-        brandCards.forEach(card => {
-            const brandName = (card.getAttribute("data-brand") || "").toLowerCase();
-            if (brandName.includes(searchTerm)) {
-                card.classList.remove("hidden");
-            } else {
-                card.classList.add("hidden");
-            }
-        });
-    } else {
-        // Filter Models
-        const modelCards = cameraModelsGrid.querySelectorAll(".model-card");
-        modelCards.forEach(card => {
-            const modelName = (card.querySelector(".model-name").textContent || "").toLowerCase();
-            if (modelName.includes(searchTerm)) {
-                card.classList.remove("hidden");
-            } else {
-                card.classList.add("hidden");
-            }
-        });
+    // Figure out which grid is active
+    if (!categorySelection.classList.contains('hidden')) {
+      // Filtering Categories
+      filterGrid(categoryGrid.querySelectorAll('.brand-card'), searchTerm, (card) => {
+        return (card.getAttribute('data-category') || "").toLowerCase();
+      });
+
+    } else if (!brandSelection.classList.contains('hidden')) {
+      // Filtering Brands
+      filterGrid(brandGrid.querySelectorAll('.brand-card'), searchTerm, (card) => {
+        return (card.getAttribute('data-brand') || "").toLowerCase();
+      });
+
+    } else if (!modelSelection.classList.contains('hidden')) {
+      // Filtering Models
+      filterGrid(modelGrid.querySelectorAll('.model-card'), searchTerm, (card) => {
+        return (card.querySelector('.model-name').textContent || "").toLowerCase();
+      });
     }
 }
 
-// Attach the event listener to the search input
+// Helper function to filter any grid
+function filterGrid(cards, searchTerm, getName) {
+  cards.forEach(card => {
+    const name = getName(card);
+    if (name.includes(searchTerm)) {
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+    }
+  });
+}
+
+// Attach search listener
 if (searchInput) {
     searchInput.addEventListener('input', handleSearch);
 }
-// ===================================================
+
+// ===== INITIAL PAGE LOAD =====
+// Start by populating the categories
+populateCategories();

@@ -48,17 +48,6 @@
     </div>
   </div>
 
-  <script src="js/state-helper.js"></script>
-
-  <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
-  <script defer src="js/firebase-config.js"></script>
-
-  <script defer src="js/login.js"></script>
-
-  <script defer src="js/warranty.js"></script>
-
   <div id="simple-login-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:2000; align-items:center; justify-content:center;">
     <div style="background:#fff; padding:18px; border-radius:8px; width:420px; max-width:95%; margin:40px auto; position:relative;">
       <button id="login-modal-close" style="position:absolute; right:10px; top:8px; border:0; background:transparent; font-size:18px; cursor:pointer;">✕</button>
@@ -85,9 +74,19 @@
 
       <div id="login-error" style="color:#b22222; margin-top:10px; display:none; font-size:13px;"></div>
       <div id="login-success" style="color:green; margin-top:10px; display:none; font-size:13px;"></div>
-
       <div id="recaptcha-container"></div>
     </div>
   </div>
-  </body>
+
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  
+  <script defer src="js/firebase-config.js"></script>
+
+  <script defer src="js/state-helper.js"></script>
+
+  <script defer src="js/login.js"></script>
+  <script defer src="js/warranty.js"></script>
+  
+</body>
 </html>

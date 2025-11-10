@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>WorthyTen - Select Camera Brand</title>
+<title>WorthyTen - Select Device</title>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
@@ -14,32 +13,36 @@
 <div class="steps-bar-track"><div class="steps-bar-fill" id="stepsFill"></div></div>
 <script src="js/header.js"></script>
 <script src="js/ui.js"></script>
+
 <div class="main-container">
-<div class="brand-selection-container" id="brandSelection">
-<div class="search-section">
-<h2 class="search-title">Search for your Camera to sell</h2>
-<div class="search-bar">
-<i class="fa-solid fa-magnifying-glass search-icon"></i>
-<input placeholder="Search for a camera brand or model" type="text" id="search-input"/>
+  
+  <div class="search-section">
+    <h2 class="search-title">Search for your Device to sell</h2>
+    <div class="search-bar">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input placeholder="Search for a brand or model" type="text" id="search-input"/>
+    </div>
+  </div>
+  <div class="brand-divider"><span class="divider-text" id="divider-text">Or choose a category</span></div>
+
+  <div class="selection-container" id="category-selection">
+    <div class="brand-grid" id="category-grid"></div>
+  </div>
+
+  <div class="selection-container hidden" id="brand-selection">
+    <a class="back-button" href="#" id="back-to-categories">← Back to Categories</a>
+    <h1 class="page-title">Sell Your Old <span id="selected-category-title"></span></h1>
+    <div class="brand-grid" id="brand-grid"></div>
+  </div>
+  
+  <div class="selection-container hidden" id="model-selection">
+    <a class="back-button" href="#" id="back-to-brands">← Back to Brands</a>
+    <h1 class="page-title">Sell Your Old <span id="selected-brand-title"></span></h1>
+    <div class="model-grid" id="model-grid"></div>
+  </div>
+  
 </div>
-</div>
-<div class="brand-divider"><span class="divider-text">Or choose a brand</span></div>
-<div class="brand-grid">
-<a class="brand-card" data-brand="Canon" href="#"><span class="brand-name">Canon</span></a>
-<a class="brand-card" data-brand="Nikon" href="#"><span class="brand-name">Nikon</span></a>
-<a class="brand-card" data-brand="Sony" href="#"><span class="brand-name">Sony</span></a>
-<a class="brand-card brand-card-logo" data-brand="Fujifilm" href="#">
-<img alt="Fujifilm Logo" class="brand-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Fujifilm_logo.svg/2560px-Fujifilm_logo.svg.png"/>
-</a>
-<a class="brand-card more-brands" href="#"><span class="brand-name">More Brands</span></a>
-</div>
-</div>
-<div class="model-selection-container hidden" id="modelSelection">
-<a class="back-button" href="#" id="backButton">← Back to Brands</a>
-<h1 class="page-title">Sell Your Old <span id="selectedBrandTitle"></span> Camera</h1>
-<div class="model-grid" id="cameraModelsGrid"></div>
-</div>
-</div>
+
 <script src="js/script.js"></script>
 
 <section class="how-works" id="how-it-works">
