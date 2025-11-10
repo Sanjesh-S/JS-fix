@@ -14,26 +14,39 @@
 <script src="js/header.js"></script>
 <script src="js/ui.js"></script>
 <div class="main-container">
-<div class="assessment-card">
-<div class="product-header">
-<a class="back-button" href="#" id="backToIssues">← Back</a>
-<h1 class="page-title" style="text-align: center; margin-bottom: 30px;">Select all accessories details</h1>
-</div>
-<div class="assessment-body">
-<div class="row between items-center" style="margin-bottom:12px">
-<button class="chip" id="noAccessoriesBtn" type="button">No accessories</button>
-<small class="muted">Add the items you have — each gives a bonus.</small>
-</div>
-<div class="issues-grid" id="accessoriesGrid"></div>
 
-<div class="final-quote-container" id="finalQuoteContainer">
-  <h3 class="hidden">Your Final Offer</h3>
-  <p class="final-price hidden" id="finalPrice"></p>
-  <a class="cta-button" href="#" id="proceedToWarrantyBtn">Next →</a>
-</div>
-</div>
-</div>
-</div>
+  <div class="assessment-layout">
+
+    <div class="assessment-card">
+      <div class="product-header">
+      <a class="back-button" href="#" id="backToIssues">← Back</a>
+      <h1 class="page-title" style="text-align: center; margin-bottom: 30px;">Select all accessories details</h1>
+      </div>
+      <div class="assessment-body">
+        <div class="row between items-center" style="margin-bottom:12px">
+          <button class="chip" id="noAccessoriesBtn" type="button">No accessories</button>
+          <small class="muted">Add the items you have — each gives a bonus.</small>
+        </div>
+        <div class="issues-grid" id="accessoriesGrid"></div>
+        
+        <div class="final-quote-container" id="finalQuoteContainer">
+          <h3 class="hidden">Your Final Offer</h3>
+          <p class="final-price hidden" id="finalPrice"></p>
+          <a class="cta-button" href="#" id="proceedToWarrantyBtn">Next →</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="evaluation-sidebar">
+      <h3 class="sidebar-title">Device Evaluation</h3>
+      <img alt="Camera Image" class="product-image-sidebar" id="evaluationImage" src="https://via.placeholder.com/150">
+      <h4 class="sidebar-model" id="evaluationModel">Device Model</h4>
+      <hr class="sidebar-divider">
+      <div id="evaluation-summary-list">
+        </div>
+    </div>
+    
+  </div> </div>
 <script src="js/state-helper.js"></script>
 <script src="js/accessories.js"></script>
 </body>

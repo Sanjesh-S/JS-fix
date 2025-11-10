@@ -5,6 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>WorthyTen - Summary</title>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
 
 <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -20,149 +21,123 @@
 <script src="js/header.js"></script>
 <script src="js/ui.js"></script>
 <div class="main-container">
-<div class="quote-card summary-card" style="max-width: 900px; margin: 0 auto;">
-<div class="product-header">
-<h1 class="product-title">Your Quote Summary</h1>
-</div>
-<div class="summary-header">
-<img alt="Camera" id="sumImage" src="https://via.placeholder.com/250"/>
-<h2 class="model-name" id="sumModel">Model</h2>
-</div>
-<div class="summary-grid" id="sumGrid"></div>
-<div class="final-quote-display">
-<h3>Final Price</h3>
-<p class="final-price" id="sumPrice">₹0</p>
-<p class="already-sold">We’ll confirm this at pickup after on-spot checks.</p>
-</div>
-<div class="summary-actions">
-<a class="nav-button prev" href="index.html">‹ Recalculate</a>
-<a class="cta-button" href="#" id="bookPickupBtn">Book Free Pickup →</a>
-</div>
-</div>
-</div>
+
+  <div class="assessment-layout">
+  
+    <div class="summary-device-card">
+      <h1 class="product-title">Your Quote Summary</h1>
+      <img alt="Device" id="sumImage" src="https://via.placeholder.com/250"/>
+      <h2 class="model-name" id="sumModel">Model</h2>
+      <p class="selling-price-label">Selling price:</p>
+      <p class="final-selling-price" id="finalSellingPrice">₹0</p>
+      <a href="index.html" class="recalculate-link">Recalculate</a>
+      
+      <div class="feature-icons">
+        <div class="feature-item">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Fast Payments</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-truck"></i>
+          <span>Free Pickup</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>100% Safe</span>
+        </div>
+      </div>
+      
+      <a class="cta-button sell-now-btn desktop-only" href="#" id="bookPickupBtnDesktop">Sell Now</a>
+    </div>
+
+    
+    <div class="evaluation-sidebar">
+      <div class="price-summary-widget" id="desktopPriceSummaryWidget">
+        <h3>Price Summary</h3>
+        </div>
+      
+      <hr class="sidebar-divider">
+
+      <h3 class="sidebar-title">Device Evaluation</h3>
+      <h4 class="sidebar-model" id="evaluationModel">Device Model</h4>
+      <ul class="summary-breakdown-list" id="summaryBreakdownList">
+         </ul>
+    </div>
+
+  </div> </div>
 <script src="js/state-helper.js"></script>
-<script src="js/summary.js"></script>
+
+<div class="mobile-sticky-footer" id="mobileFooter">
+  <div class="mobile-footer-price">
+    <span id="mobileFinalPrice">₹0</span>
+    <a href="#" id="viewBreakupBtn">View Breakup</a>
+  </div>
+  <a href="#" class="cta-button" id="bookPickupBtnMobile">Sell Now</a>
+</div>
+
+<div class="price-summary-modal-backdrop" id="priceSummaryModal">
+  <div class="price-summary-modal-content">
+    <div class="price-summary-modal-header">
+      <h3>Price Summary</h3>
+      <button id="closeSummaryModalBtn">✕</button>
+    </div>
+    <div id="modalPriceSummaryWidget"></div>
+  </div>
+</div>
 
 
 <div class="pickup-modal-backdrop" id="pickupModal" style="display:none;">
   <div class="pickup-modal-content">
     <button type="button" class="pickup-modal-close" id="modalCloseBtn">✕</button>
-    
     <div id="pickup-step-1">
       <h2 class="pickup-modal-title">Enter Pickup Details</h2>
       <p class="pickup-modal-subtitle">Where can we pick up your device?</p>
-      
       <form id="pickupForm-Step1">
-        <div class="form-group">
-          <label for="custName">Full Name</label>
-          <input type="text" id="custName" class="form-input" placeholder="Enter your name" required />
-        </div>
-        <div class="form-group">
-          <label for="custPhone">Contact Number</label>
-          <input type="tel" id="custPhone" class="form-input" placeholder="Enter your 10-digit number" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="custCityTrigger">City</label>
-          <input type="text" id="custCityTrigger" class="form-input" placeholder="Select your city" required readonly />
-        </div>
-        <div class="form-group">
-          <label for="custPincode">Pincode</label>
-          <input type="tel" id="custPincode" class="form-input" placeholder="Enter 6-digit pincode" required />
-        </div>
-        <div class="form-group">
-          <label for="custAddress">Full Address</label>
-          <textarea id="custAddress" class="form-input" placeholder="E.g., House No, Building, Street, Area" required></textarea>
-        </div>
-        
-        <div class="pickup-modal-actions">
-          <button type="submit" id="goToStep2Btn" class="cta-button">Next: Schedule Pickup</button>
-        </div>
+        <div class="form-group"><label for="custName">Full Name</label><input type="text" id="custName" class="form-input" placeholder="Enter your name" required /></div>
+        <div class="form-group"><label for="custPhone">Contact Number</label><input type="tel" id="custPhone" class="form-input" placeholder="Enter your 10-digit number" required /></div>
+        <div class="form-group"><label for="custCityTrigger">City</label><input type="text" id="custCityTrigger" class="form-input" placeholder="Select your city" required readonly /></div>
+        <div class="form-group"><label for="custPincode">Pincode</label><input type="tel" id="custPincode" class="form-input" placeholder="Enter 6-digit pincode" required /></div>
+        <div class="form-group"><label for="custAddress">Full Address</label><textarea id="custAddress" class="form-input" placeholder="E.g., House No, Building, Street, Area" required></textarea></div>
+        <div class="pickup-modal-actions"><button type="submit" id="goToStep2Btn" class="cta-button">Next: Schedule Pickup</button></div>
       </form>
     </div>
-
     <div id="pickup-step-2" style="display:none;">
       <h2 class="pickup-modal-title">Schedule Pickup</h2>
       <p class="pickup-modal-subtitle">Select a convenient date and time.</p>
-      
       <form id="pickupForm-Step2">
-        <div class="form-group">
-          <label>Select Date</label>
-          <div class="slot-selector" id="date-slots-container">
-            <p>Loading available dates...</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Select Time</label>
-          <div class="slot-selector" id="time-slots-container">
-            <p>Please select a date first.</p>
-          </div>
-        </div>
-        
-        <div class="pickup-modal-actions">
-          <button type="button" id="backToStep1Btn" class="nav-button prev">Back</button>
-          <button type="submit" id="goToStep3Btn" class="cta-button" disabled>Next: Confirm</button>
-        </div>
+        <div class="form-group"><label>Select Date</label><div class="slot-selector" id="date-slots-container"><p>Loading available dates...</p></div></div>
+        <div class="form-group"><label>Select Time</label><div class="slot-selector" id="time-slots-container"><p>Please select a date first.</p></div></div>
+        <div class="pickup-modal-actions"><button type="button" id="backToStep1Btn" class="nav-button prev">Back</button><button type="submit" id="goToStep3Btn" class="cta-button" disabled>Next: Confirm</button></div>
       </form>
     </div>
-
     <div id="pickup-step-3" style="display:none;">
       <h2 class="pickup-modal-title">Confirm Your Details</h2>
-      
       <div class="summary-review-box">
-        <div id="review-device">
-          <strong>Device:</strong> <span>Canon EOS 600D</span>
-        </div>
-        <div id="review-price">
-          <strong>Price:</strong> <span>₹45,350</span>
-        </div>
-        <hr>
-        <div id="review-name">
-          <strong>Name:</strong> <span>Sanjesh</span>
-        </div>
-        <div id="review-contact">
-          <strong>Phone:</strong> <span>1111111111</span>
-        </div>
-        <div id="review-address">
-          <strong>Address:</strong> <span>dss, Coimbatore, 123456</span>
-        </div>
-        <hr>
-        <div id="review-slot">
-          <strong>Slot:</strong> <span>Wednesday, 7 Nov at 10:00 AM - 01:00 PM</span>
-        </div>
+        <div id="review-device"><strong>Device:</strong> <span>Canon EOS 600D</span></div>
+        <div id="review-price"><strong>Price:</strong> <span>₹45,350</span></div><hr>
+        <div id="review-name"><strong>Name:</strong> <span>Sanjesh</span></div>
+        <div id="review-contact"><strong>Phone:</strong> <span>1111111111</span></div>
+        <div id="review-address"><strong>Address:</strong> <span>dss, Coimbatore, 123456</span></div><hr>
+        <div id="review-slot"><strong>Slot:</strong> <span>Wednesday, 7 Nov at 10:00 AM - 01:00 PM</span></div>
       </div>
-      
-      <div class="pickup-modal-actions">
-        <button type="button" id="backToStep2Btn" class="nav-button prev">Back</button>
-        <button type="button" id="submitPickupBtn" class="cta-button">Confirm Pickup</button>
-      </div>
+      <div class="pickup-modal-actions"><button type="button" id="backToStep2Btn" class="nav-button prev">Back</button><button type="button" id="submitPickupBtn" class="cta-button">Confirm Pickup</button></div>
     </div>
-
     <div id="pickup-step-4" style="display:none;">
       <h2 class="pickup-modal-title success">Thank You!</h2>
       <p class="pickup-modal-subtitle" style="font-size: 1.1rem; line-height: 1.6;">Your pickup request has been booked successfully.</p>
       <p style="color:#666; text-align:center;">Our agent will reach out to you shortly to confirm the pickup time.</p>
-      <div class="pickup-modal-actions">
-        <button type="button" id="closeConfirmBtn" class="cta-button">Done</button>
-      </div>
+      <div class="pickup-modal-actions"><button type="button" id="closeConfirmBtn" class="cta-button">Done</button></div>
     </div>
-
   </div>
 </div>
-
 <div class="city-popup-overlay" id="city-popup" style="display: none;">
   <div class="city-popup-content">
-    <div class="city-popup-header">
-      <h3>Select your City</h3>
-      <button type="button" class="city-popup-close" id="city-popup-close">✕</button>
-    </div>
-    <div class="city-popup-search">
-      <input type="text" id="city-search-input" class="form-input" placeholder="Search for your city..."/>
-    </div>
-    <ul class="city-popup-list" id="city-list">
-      </ul>
+    <div class="city-popup-header"><h3>Select your City</h3><button type="button" class="city-popup-close" id="city-popup-close">✕</button></div>
+    <div class="city-popup-search"><input type="text" id="city-search-input" class="form-input" placeholder="Search for your city..."/></div>
+    <ul class="city-popup-list" id="city-list"></ul>
   </div>
 </div>
+<script src="js/summary.js"></script>
 
 </body>
 </html>

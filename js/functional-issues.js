@@ -5,6 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!s) { window.location.href = 'index.html'; return; }
   const vd = JSON.parse(s);
   const basePrice = Number(vd.priceAfterPhysical || 0);
+  
+  // --- NEW: Sidebar Elements ---
+  const evaluationImage = document.getElementById('evaluationImage');
+  const evaluationModel = document.getElementById('evaluationModel');
+  const evaluationList = document.getElementById('evaluation-summary-list');
+
+  // --- NEW: Populate Sidebar Info ---
+  if (evaluationImage && vd.imageUrl) evaluationImage.src = vd.imageUrl;
+  if (evaluationModel) evaluationModel.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
+
 
   // Back
   document.getElementById('backToPhysical')?.addEventListener('click',(e)=>{ e.preventDefault(); history.back(); });
@@ -23,16 +33,56 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: 'buttons',     label: 'Buttons not working',                       img: 'images/issue-buttons.png',      deduction: 0.10 }
   ];
   const selected = new Set();
+  let noIssuesSelected = false; // NEW: Track "No Issues" state
 
   function renderIssues() {
     issuesGrid.innerHTML = issues.map(i => `
-      <div class="issue-card" data-id="${i.id}" data-deduction="${i.deduction}">
+      <div class="issue-card" data-id="${i.id}" data-deduction="${i.deduction}" data-label="${i.label}">
         <img src="${i.img}" alt="${i.label}" class="issue-image" loading="lazy" width="120" height="120">
         <p class="issue-label">${i.label}</p>
       </div>
     `).join('');
     updateProceedState();
+    updateEvaluationSidebar(); // NEW: Initial sidebar render
   }
+
+  // --- NEW: Sidebar Update Function ---
+  function updateEvaluationSidebar() {
+    if (!evaluationList) return;
+    evaluationList.innerHTML = ''; // Clear the list
+    
+    // You can add logic here to show previous steps if needed
+    // For now, it just shows this step's selections
+
+    evaluationList.innerHTML += `
+      <div class="evaluation-item">
+        <span class="evaluation-question">Functional Issues</span>
+      </div>`;
+
+    if (noIssuesSelected) {
+      evaluationList.innerHTML += `
+        <div class="evaluation-item">
+          <span class="evaluation-answer">• No Functional Issues</span>
+        </div>`;
+    } else if (selected.size > 0) {
+      selected.forEach(id => {
+        const issue = issues.find(i => i.id === id);
+        if (issue) {
+          evaluationList.innerHTML += `
+            <div class="evaluation-item">
+              <span class="evaluation-answer">• ${issue.label}</span>
+            </div>`;
+        }
+      });
+    } else {
+      // Nothing selected yet
+      evaluationList.innerHTML += `
+        <div class="evaluation-item">
+          <span class="evaluation-answer" style="color: var(--muted); font-weight: 500;">• (Select issues or "No Issues")</span>
+        </div>`;
+    }
+  }
+
 
   function recalc() {
     let total = 0;
@@ -48,10 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateProceedState(){
-    if (!proceedBtn) return;
-    const anyIssue = selected.size > 0;
-    const noIssues = noIssuesBtn?.classList.contains('selected');
-    (anyIssue || noIssues) ? proceedBtn.removeAttribute('disabled') : proceedBtn.setAttribute('disabled','disabled');
+    // This function no longer controls button state
   }
 
   // Clicks
@@ -59,20 +106,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = e.target.closest('.issue-card'); if(!card) return;
     const id = card.dataset.id;
     card.classList.toggle('selected');
+    
     noIssuesBtn?.classList.remove('selected');
+    noIssuesSelected = false; // NEW
+    
     selected.has(id) ? selected.delete(id) : selected.add(id);
     recalc(); updateProceedState();
+    updateEvaluationSidebar(); // NEW
   });
 
   noIssuesBtn?.addEventListener('click', ()=>{
     issuesGrid.querySelectorAll('.issue-card.selected').forEach(c=>c.classList.remove('selected'));
     selected.clear();
     noIssuesBtn.classList.add('selected');
+    noIssuesSelected = true; // NEW
     recalc(); updateProceedState();
+    updateEvaluationSidebar(); // NEW
   });
 
   proceedBtn?.addEventListener('click',(e)=>{
     e.preventDefault();
+    
+    // NEW: Validation
+    if (selected.size === 0 && !noIssuesSelected) {
+      alert('Please select any functional issues or "No Functional Issues".');
+      return;
+    }
+    
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
     window.location.href = 'accessories.html';
   });

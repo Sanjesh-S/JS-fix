@@ -1,4 +1,4 @@
-// js/summary.js (UPDATED for Multi-Step Modal + City Popup)
+// js/summary.js (UPDATED for new UI + Multi-Step Modal + Mobile Footer)
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Price fallbacks
+  const basePrice = vd.originalQuotePrice ?? 0;
   const finalPrice =
     vd.priceAfterWarranty ??
     vd.priceAfterAccessories ??
@@ -39,27 +40,142 @@ document.addEventListener('DOMContentLoaded', () => {
     vd.originalQuotePrice ??
     0;
 
-  // --- Fill Summary Details ---
+  // --- Main Card Elements ---
   const imgEl = document.getElementById('sumImage');
   const modelEl = document.getElementById('sumModel');
-  const priceEl = document.getElementById('sumPrice');
-  const gridEl = document.getElementById('sumGrid');
+  const finalSellingPriceEl = document.getElementById('finalSellingPrice');
+  
+  // --- Price Summary Widget (Desktop) ---
+  const desktopPriceSummaryWidget = document.getElementById('desktopPriceSummaryWidget');
 
+  // --- Sidebar Elements ---
+  const evaluationModel = document.getElementById('evaluationModel');
+  const breakdownListEl = document.getElementById('summaryBreakdownList'); // Detailed list
+  
+  // --- Mobile Footer Elements ---
+  const mobileFinalPriceEl = document.getElementById('mobileFinalPrice');
+  const viewBreakupBtn = document.getElementById('viewBreakupBtn');
+  
+  // --- Mobile Modal Elements ---
+  const priceSummaryModal = document.getElementById('priceSummaryModal');
+  const modalPriceSummaryWidget = document.getElementById('modalPriceSummaryWidget');
+  const closeSummaryModalBtn = document.getElementById('closeSummaryModalBtn');
+
+
+  // --- Populate Sidebar ---
+  if (evaluationModel) evaluationModel.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
+
+  // --- Populate Main Card ---
   if (imgEl && vd.imageUrl) imgEl.src = vd.imageUrl;
   if (modelEl) modelEl.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
-  if (priceEl) priceEl.textContent = money(finalPrice);
+  if (finalSellingPriceEl) finalSellingPriceEl.textContent = money(finalPrice);
+  
+  // --- Populate Mobile Footer ---
+  if (mobileFinalPriceEl) mobileFinalPriceEl.textContent = money(finalPrice);
 
-  const rows = [];
-  addRowIfChanged('Base Quote', vd.originalQuotePrice, null);
-  addRowIfChanged('After Assessment', vd.priceAfterAssessment, vd.originalQuotePrice);
-  addRowIfChanged('After Physical', vd.priceAfterPhysical, vd.priceAfterAssessment);
-  addRowIfChanged('After Issues', vd.priceAfterIssues, vd.priceAfterPhysical);
-  addRowIfChanged('After Accessories', vd.priceAfterAccessories, vd.priceAfterIssues);
-  addRowIfChanged('After Warranty', vd.priceAfterWarranty, vd.priceAfterAccessories);
 
-  if (gridEl) {
-    gridEl.innerHTML = rows.length ? rows.join('') : '<p class="muted">No detailed breakdown available.</p>';
+  // --- Breakdown Logic ---
+  const breakdownRows = [];
+  let lastPrice = basePrice;
+  
+  // 1. Base Price
+  breakdownRows.push(createRow('Base Quote', basePrice, 'base'));
+  
+  // 2. Assessment
+  if (vd.priceAfterAssessment != null && vd.priceAfterAssessment !== lastPrice) {
+    const delta = vd.priceAfterAssessment - lastPrice;
+    breakdownRows.push(createRow('Assessment', delta, delta >= 0 ? 'bonus' : 'deduction'));
+    lastPrice = vd.priceAfterAssessment;
   }
+  
+  // 3. Physical
+  if (vd.priceAfterPhysical != null && vd.priceAfterPhysical !== lastPrice) {
+    const delta = vd.priceAfterPhysical - lastPrice;
+    breakdownRows.push(createRow('Physical Condition', delta, delta >= 0 ? 'bonus' : 'deduction'));
+    lastPrice = vd.priceAfterPhysical;
+  }
+
+  // 4. Issues
+  if (vd.priceAfterIssues != null && vd.priceAfterIssues !== lastPrice) {
+    const delta = vd.priceAfterIssues - lastPrice;
+    breakdownRows.push(createRow('Functional Issues', delta, delta >= 0 ? 'bonus' : 'deduction'));
+    lastPrice = vd.priceAfterIssues;
+  }
+  
+  // 5. Accessories
+  if (vd.priceAfterAccessories != null && vd.priceAfterAccessories !== lastPrice) {
+    const delta = vd.priceAfterAccessories - lastPrice;
+    breakdownRows.push(createRow('Accessories', delta, delta >= 0 ? 'bonus' : 'deduction'));
+    lastPrice = vd.priceAfterAccessories;
+  }
+  
+  // 6. Warranty
+  if (vd.priceAfterWarranty != null && vd.priceAfterWarranty !== lastPrice) {
+    const delta = vd.priceAfterWarranty - lastPrice;
+    breakdownRows.push(createRow('Warranty', delta, delta >= 0 ? 'bonus' : 'deduction'));
+    lastPrice = vd.priceAfterWarranty;
+  }
+
+  // --- Populate Sidebar Detailed Breakdown ---
+  if (breakdownListEl) {
+    breakdownListEl.innerHTML = breakdownRows.join('');
+  }
+  
+  // --- NEW: Build and Populate Price Summary Widgets (Desktop + Mobile) ---
+  const totalAdjustments = finalPrice - basePrice;
+  const priceSummaryHTML = `
+    <div class="summary-row">
+      <span>Base Price</span>
+      <strong>${money(basePrice)}</strong>
+    </div>
+    <div class="summary-row">
+      <span>Adjustments</span>
+      <strong>${totalAdjustments >= 0 ? '+' : '-'} ${money(Math.abs(totalAdjustments))}</strong>
+    </div>
+    <div class="summary-row">
+      <span>Pickup Charges</span>
+      <strong>Free <s class="muted">₹100</s></strong>
+    </div>
+    <div class="summary-row total">
+      <span>Total Amount</span>
+      <strong>${money(finalPrice)}</strong>
+    </div>
+  `;
+  
+  if (desktopPriceSummaryWidget) {
+    // Inject into desktop sidebar
+    desktopPriceSummaryWidget.innerHTML += priceSummaryHTML;
+  }
+  if (modalPriceSummaryWidget) {
+    // Inject into mobile modal
+    modalPriceSummaryWidget.innerHTML = priceSummaryHTML;
+  }
+
+
+  function createRow(label, amount, typeClass) {
+    let amountStr = money(amount);
+    if (typeClass === 'bonus' && amount > 0) amountStr = `+ ${amountStr}`;
+    if (typeClass === 'deduction' && amount < 0) amountStr = `- ${money(Math.abs(amount))}`;
+    return `<li class="${typeClass}"><span>${escapeHtml(label)}</span><strong>${amountStr}</strong></li>`;
+  }
+
+  // --- NEW: Mobile Modal Listeners ---
+  viewBreakupBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (priceSummaryModal) priceSummaryModal.style.display = 'flex';
+  });
+  
+  closeSummaryModalBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (priceSummaryModal) priceSummaryModal.style.display = 'none';
+  });
+
+  priceSummaryModal?.addEventListener('click', (e) => {
+    if (e.target === priceSummaryModal) { // Only if clicking the backdrop
+      priceSummaryModal.style.display = 'none';
+    }
+  });
+
 
   // --- Modal & Booking Logic ---
   
@@ -80,8 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const dateSlotsContainer = document.getElementById('date-slots-container');
   const timeSlotsContainer = document.getElementById('time-slots-container');
 
-  // All buttons
-  const bookPickupBtn = document.getElementById('bookPickupBtn');
+  // --- MODIFIED: Get ALL "Sell Now" buttons ---
+  const bookPickupBtnDesktop = document.getElementById('bookPickupBtnDesktop');
+  const bookPickupBtnMobile = document.getElementById('bookPickupBtnMobile');
+  
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   const goToStep2Btn = document.getElementById('goToStep2Btn');
   const backToStep1Btn = document.getElementById('backToStep1Btn');
@@ -100,15 +218,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // Temp storage for form data
   let pickupData = {};
 
-  // --- Step 0: Open Modal ---
-  bookPickupBtn?.addEventListener('click', (e) => {
+  // --- MODIFIED: Open Modal Function ---
+  function openBookingModal(e) {
     e.preventDefault();
     if (!pickupModal) return;
-    
     // Reset to step 1
     showStep(step1);
     pickupModal.style.display = 'flex';
-  });
+  }
+  
+  // --- MODIFIED: Attach listener to BOTH buttons ---
+  bookPickupBtnDesktop?.addEventListener('click', openBookingModal);
+  bookPickupBtnMobile?.addEventListener('click', openBookingModal);
+
 
   // --- Close Modal ---
   modalCloseBtn?.addEventListener('click', hideModal);
@@ -328,13 +450,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (step) step.style.display = 'none';
     });
     if (stepToShow) stepToShow.style.display = 'block';
-  }
-
-  function addRowIfChanged(label, value, prev) {
-    if (value == null) return;
-    if (prev == null || Number(value) !== Number(prev)) {
-      rows.push(`<div class="sum-row"><span>${escapeHtml(label)}</span><strong>${money(value)}</strong></div>`);
-    }
   }
 
   function money(n) { return `₹${Number(n || 0).toLocaleString('en-IN')}`; }

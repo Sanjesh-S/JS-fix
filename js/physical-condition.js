@@ -16,6 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const finalQuoteContainer = document.getElementById('finalQuoteContainer');
   const proceedBtn = document.getElementById('proceedToIssuesBtn');
 
+  // --- NEW: Sidebar Elements ---
+  const evaluationImage = document.getElementById('evaluationImage');
+  const evaluationModel = document.getElementById('evaluationModel');
+  const evaluationList = document.getElementById('evaluation-summary-list');
+
+  // --- NEW: Populate Sidebar Info ---
+  if (evaluationImage && vd.imageUrl) evaluationImage.src = vd.imageUrl;
+  if (evaluationModel) evaluationModel.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
+
   // Options (kept your images/labels)
   const conditions = {
     display: [
@@ -44,11 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
     ]
   };
   
+  // Storing { category: label } for the sidebar
   const selections = { display: null, body: null, error: null, lens: null };
+  const selectionLabels = { display: null, body: null, error: null, lens: null };
+  const categoryNames = {
+    display: 'Display Condition',
+    body: 'Body Condition',
+    error: 'Error Condition',
+    lens: 'Lens Condition'
+  };
 
   function card(c, cat) {
     return `
-      <div class="condition-card" data-id="${c.id}" data-category="${cat}" data-deduction="${c.deduction}">
+      <div class="condition-card" data-id="${c.id}" data-category="${cat}" data-deduction="${c.deduction}" data-label="${c.label}">
         <img src="${c.img}" alt="${c.label}" class="condition-image" loading="lazy" width="140" height="140">
         <p class="condition-label">${c.label}</p>
       </div>`;
@@ -75,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.condition-card').forEach(card => {
       card.addEventListener('click', handleCardClick);
     });
+    
+    // NEW: Initial sidebar render
+    updateEvaluationSidebar();
   }
 
   function allChosen() {
@@ -82,27 +102,49 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function recalc() {
-    if (!allChosen()) { 
-      finalQuoteContainer?.classList.add('hidden'); 
-      return; 
-    }
+    // This function no longer controls container visibility
     const total = Object.values(selections).reduce((a,b)=>a+Number(b||0),0);
     const current = basePrice * (1 - total);
     const finalPrice = Math.round(Math.max(current, basePrice * 0.05));
     vd.priceAfterPhysical = finalPrice;
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
-    finalQuoteContainer?.classList.remove('hidden');
     // live drawer (safe if absent)
     try { window.updateOfferDrawer?.(vd); } catch {}
   }
 
-  function updateProceedButton() {
-    if (!proceedBtn) return;
-    if (allChosen()) {
-      proceedBtn.removeAttribute('disabled');
-    } else {
-      proceedBtn.setAttribute('disabled', 'disabled');
+  // --- NEW: Sidebar Update Function ---
+  function updateEvaluationSidebar() {
+    if (!evaluationList) return;
+    evaluationList.innerHTML = ''; // Clear the list
+    
+    // Show previous step's summary
+    if (vd.assessmentAnswers) {
+        Object.keys(vd.assessmentAnswers).forEach((key, index) => {
+            const q = conditions[key] || { text: 'Device powers on?' }; // Fallback, update as needed
+            const answerText = vd.assessmentAnswers[key] === 'yes' ? 'Yes' : 'No';
+            evaluationList.innerHTML += `
+              <div class="evaluation-item">
+                <span class="evaluation-question">${index+1}. ${q.text}</span>
+                <span class="evaluation-answer">• ${answerText}</span>
+              </div>`;
+        });
     }
+
+    // Show current selections
+    Object.keys(selections).forEach(cat => {
+      if (selectionLabels[cat]) {
+        evaluationList.innerHTML += `
+          <div class="evaluation-item">
+            <span class="evaluation-question">${categoryNames[cat]}</span>
+            <span class="evaluation-answer">• ${selectionLabels[cat]}</span>
+          </div>`;
+      }
+    });
+  }
+
+  function updateProceedButton() {
+    // This function is no longer needed as button is always visible
+    // and validation is on click
   }
 
   // Fixed click handler
@@ -110,9 +152,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = e.currentTarget; // Use currentTarget instead of closest
     const cat = card.dataset.category;
     const deduction = parseFloat(card.dataset.deduction);
+    const label = card.dataset.label;
     
     // Update selection
     selections[cat] = deduction;
+    selectionLabels[cat] = label; // NEW: Store label for sidebar
     
     // Remove selected class from all cards in this category
     document.querySelectorAll(`.condition-card[data-category="${cat}"]`).forEach(c => {
@@ -125,12 +169,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Recalculate and update UI
     recalc();
     updateProceedButton();
+    updateEvaluationSidebar(); // NEW: Update sidebar
   }
 
   // Next button
   proceedBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    if (proceedBtn.hasAttribute('disabled')) return; // Don't proceed if disabled
+    
+    // NEW: Validation check
+    const firstUnanswered = Object.keys(selections).find(k => selections[k] === null);
+    if (firstUnanswered) {
+      alert(`Please select an option for ${categoryNames[firstUnanswered]}.`);
+      return;
+    }
+    
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
     window.location.href = 'functional-issues.html';
   });

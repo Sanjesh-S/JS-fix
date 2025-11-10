@@ -1,7 +1,7 @@
 // js/firebase-config.js (CLEANED)
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAy1CAxcuIM929hwb6dn1wA6umUJM3LP-4",
+  apiKey: "AIzaSyC4SqbxwKCJmUBNKt85UwEJgNnep9t7qOY",
   authDomain: "worthyten-otp-a925d.firebaseapp.com",
   projectId: "worthyten-otp-a925d",
   storageBucket: "worthyten-otp-a925d.firebasestorage.app",

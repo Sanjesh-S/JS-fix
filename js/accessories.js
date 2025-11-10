@@ -12,6 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   const basePrice = Number(vd.priceAfterIssues || 0);
+  
+  // --- NEW: Sidebar Elements ---
+  const evaluationImage = document.getElementById('evaluationImage');
+  const evaluationModel = document.getElementById('evaluationModel');
+  const evaluationList = document.getElementById('evaluation-summary-list');
+
+  // --- NEW: Populate Sidebar Info ---
+  if (evaluationImage && vd.imageUrl) evaluationImage.src = vd.imageUrl;
+  if (evaluationModel) evaluationModel.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
+
 
   document.getElementById('backToIssues')?.addEventListener('click', (e)=>{ 
     e.preventDefault(); 
@@ -38,18 +48,64 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let selected = new Set(vd.accessories || []);
+  let noAccessoriesSelected = false; // NEW
 
   function render() {
     accessoriesGrid.innerHTML = accessories.map(acc => {
       const isSel = selected.has(acc.id) ? 'selected' : '';
       return `
-        <div class="issue-card ${isSel}" data-id="${acc.id}" data-bonus="${acc.bonus}">
+        <div class="issue-card ${isSel}" data-id="${acc.id}" data-bonus="${acc.bonus}" data-label="${acc.label}">
           <img src="${acc.img}" alt="${acc.label}" class="issue-image" loading="lazy" width="120" height="120" 
                onerror="this.src='https://via.placeholder.com/120?text=${encodeURIComponent(acc.label)}'">
           <p class="issue-label">${acc.label}</p>
         </div>`;
     }).join('');
+    
+    // NEW: Check if "No Accessories" should be pre-selected
+    if (vd.accessories && vd.accessories.length === 0) {
+        noAccessoriesBtn?.classList.add('selected');
+        noAccessoriesSelected = true;
+    }
+    
+    updateEvaluationSidebar(); // NEW
   }
+  
+  // --- NEW: Sidebar Update Function ---
+  function updateEvaluationSidebar() {
+    if (!evaluationList) return;
+    evaluationList.innerHTML = ''; // Clear the list
+    
+    // You can add logic here to show previous steps if needed
+    
+    evaluationList.innerHTML += `
+      <div class="evaluation-item">
+        <span class="evaluation-question">Accessories</span>
+      </div>`;
+
+    if (noAccessoriesSelected) {
+      evaluationList.innerHTML += `
+        <div class="evaluation-item">
+          <span class="evaluation-answer">• No Accessories</span>
+        </div>`;
+    } else if (selected.size > 0) {
+      selected.forEach(id => {
+        const acc = accessories.find(a => a.id === id);
+        if (acc) {
+          evaluationList.innerHTML += `
+            <div class="evaluation-item">
+              <span class="evaluation-answer">• ${acc.label}</span>
+            </div>`;
+        }
+      });
+    } else {
+      // Nothing selected yet
+      evaluationList.innerHTML += `
+        <div class="evaluation-item">
+          <span class="evaluation-answer" style="color: var(--muted); font-weight: 500;">• (Select accessories or "No accessories")</span>
+        </div>`;
+    }
+  }
+
 
   function recalc() {
     let bonus = 0;
@@ -65,20 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateProceedState() {
-    if (!nextButton) return;
-    const anyAccessory = selected.size > 0;
-    const noAccessories = noAccessoriesBtn?.classList.contains('selected');
-    
-    // We also need to show the final quote container
+    // This function no longer controls button state
+    // We just ensure the container is visible
     const finalQuoteContainer = document.getElementById('finalQuoteContainer');
-    
-    if (anyAccessory || noAccessories) {
-      nextButton.removeAttribute('disabled');
-      finalQuoteContainer?.classList.remove('hidden'); // Show the container
-    } else {
-      nextButton.setAttribute('disabled','disabled');
-      finalQuoteContainer?.classList.add('hidden'); // Hide the container
-    }
+    finalQuoteContainer?.classList.remove('hidden'); // Show the container
   }
 
   accessoriesGrid.addEventListener('click', (e)=>{
@@ -88,10 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
     
     card.classList.toggle('selected');
     noAccessoriesBtn?.classList.remove('selected');
+    noAccessoriesSelected = false; // NEW
     
     selected.has(id) ? selected.delete(id) : selected.add(id);
     recalc();
     updateProceedState();
+    updateEvaluationSidebar(); // NEW
   });
 
   noAccessoriesBtn?.addEventListener('click', () => {
@@ -99,17 +147,24 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach(c => c.classList.remove('selected'));
     selected.clear();
     noAccessoriesBtn.classList.add('selected');
+    noAccessoriesSelected = true; // NEW
     
     vd.priceAfterAccessories = basePrice;
     vd.accessories = [];
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
     recalc();
     updateProceedState();
+    updateEvaluationSidebar(); // NEW
   });
 
   nextButton.addEventListener('click', (e)=>{
     e.preventDefault();
-    if (nextButton.hasAttribute('disabled')) return;
+    
+    // NEW: Validation
+    if (selected.size === 0 && !noAccessoriesSelected) {
+      alert('Please select any accessories or "No accessories".');
+      return;
+    }
     
     sessionStorage.setItem('valuationData', JSON.stringify(vd));
     window.location.href = 'warranty.html';

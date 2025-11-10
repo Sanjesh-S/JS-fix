@@ -15,6 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('fullModelName').textContent = `${valuationData.brandName || ''} ${valuationData.modelName || ''}`.trim();
   if (valuationData.imageUrl) document.getElementById('productImage').src = valuationData.imageUrl;
 
+  // --- NEW: Sidebar Elements ---
+  const evaluationImage = document.getElementById('evaluationImage');
+  const evaluationModel = document.getElementById('evaluationModel');
+  const evaluationList = document.getElementById('evaluation-summary-list');
+
+  // --- NEW: Populate Sidebar Info ---
+  if (evaluationImage && valuationData.imageUrl) evaluationImage.src = valuationData.imageUrl;
+  if (evaluationModel) evaluationModel.textContent = `${valuationData.brandName || ''} ${valuationData.modelName || ''}`.trim();
+
+
   const questions = [
     { id: 'powerOn',        text: 'Does your camera power on and function properly?',                         deduction: 0.30 },
     { id: 'bodyDamage',     text: 'Is the camera body free from major damage (cracks, dents, water damage)?', deduction: 0.25 },
@@ -52,15 +62,29 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem('valuationData', JSON.stringify(valuationData));
   }
 
+  // --- NEW: Sidebar Update Function ---
+  function updateEvaluationSidebar() {
+    if (!evaluationList) return;
+    evaluationList.innerHTML = ''; // Clear the list
+
+    questions.forEach(q => {
+      if (userAnswers[q.id]) {
+        const answerText = userAnswers[q.id] === 'yes' ? 'Yes' : 'No';
+        const itemHTML = `
+          <div class="evaluation-item">
+            <span class="evaluation-question">${q.text}</span>
+            <span class="evaluation-answer">• ${answerText}</span>
+          </div>
+        `;
+        evaluationList.innerHTML += itemHTML;
+      }
+    });
+  }
+
+  // MODIFIED: This function no longer needs to hide/show or disable the button
   function updateProceedVisibility() {
-    const answered = Object.keys(userAnswers).length;
-    const total    = questions.length;
-    if (answered === total && total > 0) {
-      finalQuoteContainer.classList.remove('hidden');
-      proceedBtn?.removeAttribute('disabled');     // make sure it’s clickable
-    } else {
-      proceedBtn?.setAttribute('disabled', 'disabled');
-    }
+    // This function is no longer responsible for button visibility.
+    // Validation is now handled on click.
   }
 
   // Delegate clicks for both buttons and any inner spans/icons
@@ -78,16 +102,22 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.classList.add('selected');
 
     calculatePriceAndStore();
-    updateProceedVisibility();
+    updateProceedVisibility(); // This call remains but the function is now empty
+    updateEvaluationSidebar(); // --- NEW: Update sidebar on click ---
   });
 
   // Proceed
+  // MODIFIED: Added validation alert
   proceedBtn?.addEventListener('click', (e) => {
     e.preventDefault();
 
-    // if somehow clicked early, block it
-    if (proceedBtn.hasAttribute('disabled')) return;
-
+    // NEW: Validation check
+    const firstUnanswered = questions.find(q => !userAnswers[q.id]);
+    if (firstUnanswered) {
+      alert('Please select an option for:\n"' + firstUnanswered.text + '"');
+      return; // Stop execution
+    }
+    
     // persist answers for later steps
     valuationData.assessmentAnswers = userAnswers;
     sessionStorage.setItem('valuationData', JSON.stringify(valuationData));
