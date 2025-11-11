@@ -1,4 +1,4 @@
-// js/summary.js (UPDATED for new UI + Multi-Step Modal + Mobile Footer)
+// js/summary.js (FIXED time slot bug)
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -221,6 +221,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- MODIFIED: Open Modal Function ---
   function openBookingModal(e) {
     e.preventDefault();
+    
+    // ===================================================
+    // NEW: Check if user is logged in before opening
+    // ===================================================
+    if (!firebase.auth().currentUser) {
+        alert("Please log in first to book a pickup!");
+        // We can also be helpful and open the modal
+        if (window.LoginModal && typeof window.LoginModal.show === 'function') {
+            window.LoginModal.show();
+        }
+        return;
+    }
+    // ===================================================
+
     if (!pickupModal) return;
     // Reset to step 1
     showStep(step1);
@@ -315,6 +329,11 @@ document.addEventListener('DOMContentLoaded', () => {
     goToStep3Btn.disabled = true;
     
     TIME_SLOTS.forEach(slot => {
+      // ===================================================
+      // THE FIX IS HERE:
+      // Was: <label for="${id}">${slot.text}</label>
+      // Now: <label for="${slot.id}">${slot.text}</label>
+      // ===================================================
       const slotHTML = `
         <div class="slot-option">
           <input type="radio" id="${slot.id}" name="pickupTime" value="${slot.text}">
@@ -343,6 +362,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   submitPickupBtn?.addEventListener('click', () => {
+    // ===================================================
+    // NEW: Get the logged-in user's ID
+    // ===================================================
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        alert("Your session has expired. Please log in again to confirm.");
+        hideModal();
+        if (window.LoginModal && typeof window.LoginModal.show === 'function') {
+            window.LoginModal.show();
+        }
+        return;
+    }
+    // ===================================================
+
     // 1. Get user details from our temp object
     const pickupDetails = {
       name: pickupData.name,
@@ -361,6 +394,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 3. Combine into one record
     const pickupRequest = {
+      // ===================================================
+      // NEW: Add the user ID
+      // ===================================================
+      userId: user.uid, // This is the link to the 'users' collection
+      // ===================================================
       customer: pickupDetails,
       schedule: scheduleDetails,
       device: { ...vd },

@@ -1,11 +1,10 @@
-// js/warranty.js (v3 - CORRECTED)
-// This version fixes the button visibility issue.
+// js/warranty.js (v4 - Global Login)
 
 document.addEventListener("DOMContentLoaded", () => {
   // Safe read of valuationData
   let vd = null;
   try {
-    if (window.StateHelper && typeof window.StateHelper.safeGetValVluationData === 'function') {
+    if (window.StateHelper && typeof window.StateHelper.safeGetValuationData === 'function') {
       vd = window.StateHelper.safeGetValuationData();
     } else {
       const dataStr = sessionStorage.getItem("valuationData");
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (!vd) {
-    // If helper exists, show friendly message; otherwise fallback to index.html
     if (window.StateHelper && typeof window.StateHelper.showMissingStateMessage === 'function') {
       window.StateHelper.showMissingStateMessage('This page needs data from the start flow. Click Start Over to begin again.');
     } else {
@@ -31,21 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const nameEl = document.getElementById("deviceName");
   const finalEl = document.getElementById("finalPrice");
   const finalBox = document.getElementById("finalQuoteDisplay");
-  const finishBtn = document.getElementById("finishButton");
+  const finishBtn = document.getElementById("finishBtn"); // Corrected ID from 'finishButton' to 'finishBtn'
   const ageRadios = document.querySelectorAll('input[name="device_age"]');
   const finalPriceLabel = finalBox ? finalBox.querySelector('h3') : null;
 
-  // ===================================================
-  // THE FIX:
-  // 1. Show the main box (so the button is visible)
-  // 2. Hide the price elements (until verification)
-  // ===================================================
-  if (finalBox) finalBox.classList.remove("hidden"); // <-- THIS IS THE NEW LINE
+  // Show the box, hide the price
+  if (finalBox) finalBox.classList.remove("hidden");
   if (finalPriceLabel) finalPriceLabel.classList.add("hidden");
   if (finalEl) finalEl.classList.add("hidden");
-  // ===================================================
-
-  // Fill basic UI
+  
   if (img && vd.imageUrl) img.src = vd.imageUrl;
   if (nameEl) nameEl.textContent = `${vd.brandName || ""} ${vd.modelName || ""}`.trim();
 
@@ -64,13 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
     try { window.updateOfferDrawer?.(vd); } catch {}
   }
 
-  // Recalculate when age option changes
   ageRadios.forEach(r => r.addEventListener("change", calcFinal));
 
-  // Two-step confirm
   let armed = false;
 
-  // Helper: check session verification flag
   function isSessionVerified() {
     try {
       return sessionStorage.getItem('isVerified') === '1';
@@ -79,60 +68,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Helper: show final price elements
   function revealFinalAndArm() {
-    calcFinal(); // ensure price is up-to-date
+    calcFinal(); 
     
-    // Show the price elements
     if (finalPriceLabel) finalPriceLabel.classList.remove("hidden");
     if (finalEl) finalEl.classList.remove("hidden");
 
     if (finishBtn) finishBtn.textContent = "Confirm Order";
     armed = true;
-    try { window.showToast?.('Review final price, then confirm.'); } catch {}
   }
+  
+  // --- NEW: Define a callback function ---
+  // This lets js/login.js tell this page "verification is done"
+  window.onLoginVerified = () => {
+    console.log("Login verified callback executed.");
+    revealFinalAndArm();
+  };
 
   // Click handler
   if (finishBtn) {
     finishBtn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // If already armed (user clicked once and price is visible), proceed to summary
       if (armed) {
         window.location.href = "summary.html";
         return;
       }
 
-      // If no age selected, ask user to select
       const selectedAge = document.querySelector('input[name="device_age"]:checked')?.value;
       if (!selectedAge) {
         alert('Please select the device age before finishing.');
         return;
       }
 
-      // If user already verified in session, reveal final and arm right away
       if (isSessionVerified()) {
         revealFinalAndArm();
         return;
       }
 
-      // Not verified: open login modal if available
+      // --- MODIFIED: Call the global login modal ---
       if (window.LoginModal && typeof window.LoginModal.show === 'function') {
-        // Show modal and when verified, reveal price and proceed
-        window.LoginModal.show(function onVerified() {
-          try { sessionStorage.setItem('isVerified', '1'); } catch (e) {}
-          revealFinalAndArm();
-        });
+        alert('Please log in or verify your number to see the final price.');
+        // The modal is shown, and onLoginVerified() will be called on success
+        window.LoginModal.show(); 
       } else {
-        // No login modal available: ask user to login (fallback)
-        const ok = confirm('You must login/verify to view the final price. Press OK to go to the home page and start the flow.');
-        if (ok) window.location.href = 'index.html';
+        // Fallback if login.js didn't load
+        console.error("Global login modal (window.LoginModal.show) not found.");
+        alert("Error: Login module not loaded. Please refresh the page.");
       }
     });
   } else {
-    console.warn('warranty.js: finish button (#finishButton) not found.');
+    console.warn('warranty.js: finish button (#finishBtn) not found.');
   }
 
-  // init - run initial calc (but price stays hidden)
+  // init
   calcFinal();
 });

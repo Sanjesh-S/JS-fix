@@ -58,12 +58,29 @@
             font-weight: 700;
             color: var(--ok);
         }
+        .status-completed {
+            font-weight: 600;
+            color: var(--muted);
+        }
         .details-col {
             font-size: 14px;
             line-height: 1.5;
         }
         .details-col strong {
             color: #000;
+        }
+        .complete-btn {
+            padding: 6px 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            border: 0;
+            background: var(--brand-2);
+            color: #fff;
+        }
+        .complete-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -83,11 +100,11 @@
                     <th>Price</th>
                     <th>Slot</th>
                     <th>Status</th>
-                </tr>
+                    <th>Actions</th> </tr>
             </thead>
             <tbody id="pickup-list-body">
                 <tr>
-                    <td colspan="5" style="text-align: center; padding: 20px;">Loading requests...</td>
+                    <td colspan="6" style="text-align: center; padding: 20px;">Loading requests...</td>
                 </tr>
             </tbody>
         </table>

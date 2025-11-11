@@ -1,16 +1,27 @@
 <header class="site-header">
-  <nav class="main-nav">
+  <nav class="main-nav new-header-layout">
     <a href="index.html" class="nav-logo">WorthyTen</a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <div class="header-search-container">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" placeholder="Search for your device..." class="header-search-input" />
+    </div>
 
-    <ul id="navLinks">
-      <li><a href="#">Sell Device<span class="arrow-down"></span></a></li>
-      <li><a href="#">Buy Device</a></li>
-      <li><a href="#">Enquiry Form</a></li>
-      <li><a href="#">Our Stores</a></li>
-      <li><a href="#">Blogs</a></li>
-      <li><a href="#">More<span class="arrow-down"></span></a></li>
-    </ul>
+    <div class="header-user-controls">
+      <a href="#" class="header-link" id="globalLoginBtn">
+        <i class="fa-regular fa-user"></i>
+        <span>Login</span>
+      </a>
+      <a href="#" class="header-link" id="walletBtn">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Coins</span>
+        <span class="badge" id="walletCoinBalance">0</span>
+      </a>
+      <a href="index.html" class="cta-button header-sell-btn">
+        <i class="fa-solid fa-star"></i>
+        <span>Sell</span>
+      </a>
+    </div>
   </nav>
-</header>
+  
+  </header>
