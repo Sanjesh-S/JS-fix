@@ -32,9 +32,86 @@
             background: var(--brand);
             color: #fff;
         }
-        .pickup-table-container {
-            padding: 20px;
+
+        /* NEW: Tab Styles */
+        .admin-tabs {
+            padding: 20px 20px 0 20px;
+            display: flex;
+            gap: 10px;
         }
+        .tab-btn {
+            padding: 10px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            background: #f0f0f0;
+            color: #555;
+        }
+        .tab-btn.active {
+            background: #fff;
+            color: var(--brand);
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+            position: relative;
+        }
+
+        /* NEW: Panel Styles */
+        .admin-panel {
+            display: none; /* Hidden by default */
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0 12px 12px 12px;
+            margin: 0 20px 20px 20px;
+        }
+        .admin-panel.active {
+            display: block; /* Shown by tab JS */
+        }
+        
+        /* NEW: Product Form */
+        .product-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #f5f5f5;
+            border: 1px solid rgba(0,0,0,.10);
+            font-family: 'Urbanist', sans-serif;
+            font-size: 15px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-actions {
+            grid-column: 1 / -1;
+            text-align: right;
+            margin-top: 10px;
+        }
+        .save-btn {
+            padding: 10px 18px;
+        }
+        #product-form-status {
+            font-weight: 600;
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Table Styles (shared) */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -69,16 +146,25 @@
         .details-col strong {
             color: #000;
         }
-        .complete-btn {
+        .action-btn {
             padding: 6px 10px;
             font-weight: 600;
             cursor: pointer;
             border-radius: 8px;
             border: 0;
-            background: var(--brand-2);
             color: #fff;
+            margin-right: 5px;
         }
-        .complete-btn:disabled {
+        .complete-btn {
+            background: var(--brand-2);
+        }
+        .edit-btn {
+            background: var(--warning);
+        }
+        .delete-btn {
+            background: var(--danger);
+        }
+        .action-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
         }
@@ -87,27 +173,89 @@
 <body>
 
     <div class="admin-header">
-        <h1>Pickup Requests</h1>
+        <h1>Admin Dashboard</h1>
         <button id="logout-button" class="logout-btn">Logout</button>
     </div>
-    
-    <div class="pickup-table-container">
-        <table id="pickup-table">
-            <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Device</th>
-                    <th>Price</th>
-                    <th>Slot</th>
-                    <th>Status</th>
-                    <th>Actions</th> </tr>
-            </thead>
-            <tbody id="pickup-list-body">
-                <tr>
-                    <td colspan="6" style="text-align: center; padding: 20px;">Loading requests...</td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="admin-tabs">
+        <button id="showPickupsBtn" class="tab-btn active">Pickup Requests</button>
+        <button id="showProductsBtn" class="tab-btn">Manage Products</button>
+    </div>
+
+    <div id="pickupsPanel" class="admin-panel active">
+        <div class="pickup-table-container">
+            <table id="pickup-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Device</th>
+                        <th>Price</th>
+                        <th>Slot</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="pickup-list-body">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 20px;">Loading requests...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="productsPanel" class="admin-panel">
+        <h2>Add New Product</h2>
+        <form id="product-form">
+            <div class="product-form-grid">
+                <div class="form-group">
+                    <label for="product-category">Category</label>
+                    <input type="text" id="product-category" class="form-input" placeholder="e.g., DSLR Cameras" required />
+                </div>
+                <div class="form-group">
+                    <label for="product-brand">Brand</label>
+                    <input type="text" id="product-brand" class="form-input" placeholder="e.g., Canon" required />
+                </div>
+                <div class="form-group">
+                    <label for="product-name">Model Name</label>
+                    <input type="text" id="product-name" class="form-input" placeholder="e.g., Canon 90D" required />
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Base Price</label>
+                    <input type="number" id="product-price" class="form-input" placeholder="e.g., 10000" required />
+                </div>
+                <div class="form-group full-width">
+                    <label for="product-image">Image URL</label>
+                    <input type="text" id="product-image" class="form-input" placeholder="Paste Firebase Storage URL here" required />
+                </div>
+                <div class="form-actions">
+                    <p id="product-form-status"></p>
+                    <button type="submit" id="save-product-btn" class="cta-button save-btn">Save Product</button>
+                </div>
+            </div>
+        </form>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 24px 0;">
+        
+        <h2>Existing Products</h2>
+        <div class="product-table-container">
+            <table id="product-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list-body">
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 20px;">Loading products...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>

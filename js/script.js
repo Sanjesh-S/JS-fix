@@ -1,214 +1,4 @@
-// js/script.js (NEW VERSION - CATEGORY-FIRST FLOW)
-
-// ===================================================
-// YOUR NEW PRODUCT DATABASE
-// ===================================================
-// You can add all your products here, organized by category and brand.
-const PRODUCT_DATA = {
-  "DSLR Cameras": {
-    "Canon": [
-      { name: "Canon EOS 1200D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 1300D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 1500D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 700D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 200D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 200D Mark II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 77D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 60D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 70D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 80D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 6D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 7D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 5D Mark II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 5D Mark III", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 5D Mark IV", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 6D Mark II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 7D Mark II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 600D", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-600d.png", price: 18000 },
-      { name: "Canon EOS 800D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 500D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 550D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 650D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 750D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 760D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 450D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 1100D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 1000D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS 3000D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon M50 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon M5 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS M200", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R5", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r5.png", price: 280000 },
-      { name: "Canon EOS RP", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R6 Mark II", image: "https://storage.googleapis.com/gemini-camera-images/canon-eos-r6-mark-ii.png", price: 190000 },
-      { name: "Canon PowerShot SX740 HS", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon 90D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon 100D", image: "https://firebasestorage.googleapis.com/v0/b/worthyten-otp-a925d.appspot.com/o/camera_images%2Fcanon-eos-100d.png?alt=media&token=5e0f204e-e680-47e5-b473-bb99e5f4cd06", price: 19000 },
-      { name: "Canon EOS 850D", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R8", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS M100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon G7 X Mark III", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon G7 X Mark II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon G7 X", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon PowerShot SX70 HS", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon IXUS 285 HS", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS Rebel T6", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon PowerShot SX430 IS", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R50", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R10", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-      { name: "Canon EOS R7", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 }
-    ],
-    "Nikon": [
-        { name: "Nikon Z9", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z9.png", price: 470000 },
-        { name: "Nikon Z8", image: "https://storage.googleapis.com/gemini-camera-images/nikon-z8.png", price: 310000 },
-        { name: "Nikon D850", image: "https://storage.googleapis.com/gemini-camera-images/nikon-d850.png", price: 180000 },
-        { name: "Nikon D3100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D3200", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D3300", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D3400", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D3500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D5100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D5200", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D5300", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D5500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D5600", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D7000", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D7100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D7200", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D810", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D750", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D800", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D7500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D300S", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D3000", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D90", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Z 50 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Z 5 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Z 6 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Z 7 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon D5000", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon 800E", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Z7 II Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Z6 II Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P90", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P510", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P520", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P530", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P600", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P610", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P950", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix P1000", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix L120", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix L320", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix L340", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix L820", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix L830", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Nikon Coolpix L840", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 }
-    ],
-    "Sony": [
-        { name: "Sony a7R V", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7r-v.png", price: 300000 },
-        { name: "Sony a7 IV", image: "https://storage.googleapis.com/gemini-camera-images/sony-a7-iv.png", price: 180000 },
-        { name: "Sony Alpha A6500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A68", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A77 II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A5100 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A6000 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A5000 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A6300 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7 II Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7 III", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A58", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A3500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony CyberShot DSC-H300", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Cybershot DSC-W190", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A6600 Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7R", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7R II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7R III", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7s III", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7s", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A6100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A6400", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A37", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Cybershot DSC-WX500", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Cybershot DSC-H100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Cybershot DSC-H200", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Cybershot DSC-H400", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha ZV E1", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha ZV E10", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7C", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7C II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha A7CR", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha FX 30", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha FX3", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha 6700", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony ZV-1F", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Sony Alpha ZV-E10 II", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 }
-    ],
-    "Fujifilm": [
-        { name: "Fujifilm X-T5", image: "https://storage.googleapis.com/gemini-camera-images/fujifilm-x-t5.png", price: 140000 },
-        { name: "Fujifilm X-A7", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-A1", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-A5", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-H2", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-H2S", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-S20", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T3", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T100", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T10", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T200", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T20", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T30", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T2", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name:  "Fujifilm X-T4", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X-T30 II Mirrorless", image: "httpss://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "Fujifilm X100F Mirrorless", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 }
-    ],
-    "GoPro": [
-        { name: "GoPro Hero 4", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 5", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 6", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 7", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 8", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 9", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 10", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 11", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 11 Mini", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero Plus", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Max 360", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Fusion", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 12", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 },
-        { name: "GoPro Hero 13", image: "https://storage.googleapis.com/gemini-camera-images/placeholder.png", price: 10000 }
-    ],
-    "Panasonic": [
-        { name: "Panasonic Lumix S5 II", image: "https://storage.googleapis.com/gemini-camera-images/panasonic-lumix-s5-ii.png", price: 160000 },
-    ]
-  },
-  "Smartphones": {
-    "Apple": [
-      { name: "iPhone 15 Pro", image: "httpsto://example.com/img.png", price: 90000 },
-      { name: "iPhone 14", image: "https://example.com/img.png", price: 55000 },
-    ],
-    "Samsung": [
-      { name: "Galaxy S23 Ultra", image: "https://example.com/img.png", price: 80000 },
-    ]
-  },
-  "Laptops & Macs": {
-    "Apple": [
-      { name: "MacBook Pro 14 (M3)", image: "https://example.com/img.png", price: 150000 },
-    ],
-    "Dell": [
-      { name: "XPS 15", image: "https://example.com/img.png", price: 110000 },
-    ]
-  }
-};
-// ===================================================
-
+// js/script.js (NEW DYNAMIC VERSION - Fetches from Firestore)
 
 // ===== DOM ELEMENTS =====
 const searchInput = document.getElementById("search-input");
@@ -228,7 +18,9 @@ const selectedBrandTitle = document.getElementById("selected-brand-title");
 const backToCategoriesBtn = document.getElementById("back-to-categories");
 const backToBrandsBtn = document.getElementById("back-to-brands");
 
-// Store the currently selected category and brand
+// ===== GLOBAL DATA STORE =====
+// This will hold all our products fetched from Firestore
+let allProducts = [];
 let currentCategory = null;
 let currentBrand = null;
 
@@ -242,11 +34,22 @@ function showSection(sectionToShow) {
   sectionToShow.classList.remove("hidden");
 }
 
-// 1. Populate Categories (On Page Load)
+// 1. Populate Categories
 function populateCategories() {
   categoryGrid.innerHTML = "";
-  Object.keys(PRODUCT_DATA).forEach(categoryName => {
-    // You can add specific icons here if you want
+  
+  // ===================================================
+  // THE FIX IS HERE
+  // We add .filter(c => c) to remove any "undefined" or null categories
+  // ===================================================
+  const categories = [...new Set(
+    allProducts
+      .map(p => p.category)
+      .filter(c => c) // This filters out any falsy values (null, undefined, "")
+  )];
+  categories.sort(); // Sort them alphabetically
+
+  categories.forEach(categoryName => {
     const cardHTML = `
       <a href="#" class="brand-card" data-category="${categoryName}">
         <span class="brand-name">${categoryName}</span>
@@ -271,11 +74,19 @@ function populateCategories() {
   });
 }
 
-// 2. Populate Brands (When a category is clicked)
+// 2. Populate Brands
 function populateBrands(categoryName) {
   brandGrid.innerHTML = "";
-  const brands = Object.keys(PRODUCT_DATA[categoryName]);
   
+  // Get all unique brands *for this category*
+  const brands = [...new Set(
+    allProducts
+      .filter(p => p.category === categoryName)
+      .map(p => p.brand)
+      .filter(b => b) // Also filter out any bad brand data
+  )];
+  brands.sort(); // Sort them alphabetically
+
   brands.forEach(brandName => {
     const cardHTML = `
       <a href="#" class="brand-card" data-brand="${brandName}">
@@ -301,10 +112,18 @@ function populateBrands(categoryName) {
   });
 }
 
-// 3. Populate Models (When a brand is clicked)
+// 3. Populate Models
 function populateModels(categoryName, brandName) {
   modelGrid.innerHTML = "";
-  const models = PRODUCT_DATA[categoryName][brandName];
+  
+  // Get all models that match both category and brand
+  const models = allProducts.filter(p => 
+    p.category === categoryName && p.brand === brandName
+  );
+  
+  // Sort the models array naturally
+  const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
+  models.sort((a, b) => collator.compare(a.name, b.name));
   
   models.forEach(model => {
     const cardHTML = `
@@ -384,5 +203,54 @@ if (searchInput) {
 }
 
 // ===== INITIAL PAGE LOAD =====
-// Start by populating the categories
-populateCategories();
+
+// This function will run as soon as the DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Show a loading message
+  categoryGrid.innerHTML = "<p>Loading products...</p>";
+
+  // Ensure Firebase is ready before trying to fetch
+  function checkFirebase() {
+    if (window.firebase && firebase.firestore) {
+      fetchProducts();
+    } else {
+      // Firebase isn't loaded yet, check again in 100ms
+      setTimeout(checkFirebase, 100);
+    }
+  }
+
+  async function fetchProducts() {
+    try {
+      const db = firebase.firestore();
+      const snapshot = await db.collection("products").get();
+      
+      if (snapshot.empty) {
+        categoryGrid.innerHTML = "<p>No products found. Please add some in the admin dashboard.</p>";
+        return;
+      }
+      
+      // Map Firestore documents to our allProducts array
+      allProducts = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.name,
+          brand: data.brand,
+          category: data.category,
+          price: data.price,
+          image: data.image
+        };
+      });
+
+      // Now that we have data, populate the categories
+      populateCategories();
+      
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      categoryGrid.innerHTML = "<p>Error loading products. Please check the console.</p>";
+    }
+  }
+
+  // Start the process
+  checkFirebase();
+});
