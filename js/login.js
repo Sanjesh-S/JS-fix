@@ -9,19 +9,21 @@
    * and updates the header UI with coin balance and account status.
    */
   async function updateUserUI(user) {
-    if (!user) { // User is logged out
-      if (loginBtnSpan) loginBtnSpan.textContent = "Login";
-      if (walletBalanceEl) walletBalanceEl.textContent = "0";
-      return;
-    }
-    
-    // User is logged in
-    if (!firebase.firestore) return; // Exit if firestore is not loaded
-
     // Get header elements
     if (!globalLoginBtn) globalLoginBtn = document.getElementById("globalLoginBtn");
     if (!walletBalanceEl) walletBalanceEl = document.getElementById("walletCoinBalance");
     if (!loginBtnSpan) loginBtnSpan = globalLoginBtn?.querySelector('span');
+
+    if (!user) { // User is logged out
+      if (loginBtnSpan) loginBtnSpan.textContent = "Login";
+      if (walletBalanceEl) walletBalanceEl.textContent = "0";
+      if (globalLoginBtn) globalLoginBtn.href = "login.html"; // Set link to login page
+      return;
+    }
+    
+    // User is logged in
+    if (globalLoginBtn) globalLoginBtn.href = "account.html"; // Set link to account page
+    if (!firebase.firestore) return; // Exit if firestore is not loaded
 
     try {
       const db = firebase.firestore();
@@ -29,25 +31,19 @@
       const userDoc = await userRef.get();
 
       if (userDoc.exists) {
-        // User exists, get their data
         const userData = userDoc.data();
         if (walletBalanceEl) walletBalanceEl.textContent = userData.coins || 0;
         if (loginBtnSpan) loginBtnSpan.textContent = "My Account";
-
       } else {
-        // New user, create their document
         const newUser = {
           phoneNumber: user.phoneNumber,
           coins: 0,
           createdAt: new Date().toISOString()
         };
         await userRef.set(newUser);
-        
-        // Set UI for new user
         if (walletBalanceEl) walletBalanceEl.textContent = 0;
         if (loginBtnSpan) loginBtnSpan.textContent = "My Account";
       }
-
     } catch (e) {
       console.error("Error fetching/creating user data:", e);
       if (loginBtnSpan) loginBtnSpan.textContent = "Error";
@@ -55,54 +51,16 @@
     }
   }
 
-  /**
-   * Shows the login modal.
-   */
-  function showLoginModal(e) {
-    if (e) e.preventDefault();
-    if (!modal) return; 
-    
-    modal.style.display = "flex";
-    errorBox.style.display = "none";
-    successBox.style.display = "none";
-
-    // Initialize reCAPTCHA
-    if (!window.recaptchaVerifier) {
-      let recaptchaContainer = document.getElementById('recaptcha-container');
-      if (!recaptchaContainer) {
-        recaptchaContainer = document.createElement('div');
-        recaptchaContainer.id = 'recaptcha-container';
-        document.body.appendChild(recaptchaContainer);
-      }
-
-      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-        size: 'invisible',
-        callback: function(response) {
-          console.log("reCAPTCHA verified");
-        }
-      });
-    }
-  }
+  // --- NEW: Handle Logout (defined outside) ---
   
-  // --- NEW: Handle Logout ---
-  function handleLogout() {
-    if (confirm("Are you sure you want to log out?")) {
-      firebase.auth().signOut().then(() => {
-        console.log("User logged out.");
-        // The onAuthStateChanged listener will automatically update the UI
-      }).catch((error) => {
-        console.error("Error logging out:", error);
-      });
-    }
-  }
-
+  
   /**
    * Finds all DOM elements and attaches listeners.
    */
   function setupLoginModal() {
     // Find all elements
     globalLoginBtn = document.getElementById("globalLoginBtn");
-    modal = document.getElementById("simple-login-modal");
+    modal = document.getElementById("simple-login-modal"); // This is the OLD modal
     closeModal = document.getElementById("login-modal-close");
     phoneInput = document.getElementById("login-phone");
     otpInput = document.getElementById("login-otp");
@@ -114,20 +72,63 @@
     successBox = document.getElementById("login-success");
     walletBalanceEl = document.getElementById("walletCoinBalance");
     loginBtnSpan = globalLoginBtn?.querySelector('span');
-
-    // --- MODIFIED: Smart Login/Logout Button ---
-    globalLoginBtn?.addEventListener("click", (e) => {
-      e.preventDefault();
-      const user = firebase.auth().currentUser;
-      if (user) {
-        // If user is logged IN, clicking the button will log them out
-        handleLogout();
+    
+    // --- This is the function for the OLD modal on summary.html etc. ---
+    function showOldLoginModal(e) {
+      if (e) e.preventDefault();
+      // If modal elements are on the current page, show the modal
+      if (modal && errorBox && successBox) {
+        modal.style.display = "flex";
+        errorBox.style.display = "none";
+        successBox.style.display = "none";
+        
+        // Initialize reCAPTCHA for the modal
+        if (!window.recaptchaVerifier) {
+          let recaptchaContainer = document.getElementById('recaptcha-container');
+          if (!recaptchaContainer) {
+            recaptchaContainer = document.createElement('div');
+            recaptchaContainer.id = 'recaptcha-container';
+            document.body.appendChild(recaptchaContainer);
+          }
+    
+          window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            size: 'invisible',
+            callback: function(response) { console.log("reCAPTCHA verified"); }
+          });
+        }
       } else {
-        // If user is logged OUT, clicking the button shows the login modal
-        showLoginModal();
+        // If no modal on this page, redirect to the login page
+        window.location.href = 'login.html';
       }
-    });
-    // --- End of Modification ---
+    }
+    
+    // --- Initialize reCAPTCHA if on a page that has it ---
+    const recaptchaContainer = document.getElementById('recaptcha-container');
+    if (recaptchaContainer) {
+      // This is for login.html OR the old modal
+      try {
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+          'size': 'invisible',
+          'callback': (response) => {
+            console.log("reCAPTCHA verified, now sending OTP.");
+          }
+        });
+        // Render it (it's invisible, but this prepares it)
+        window.recaptchaVerifier.render().then((widgetId) => {
+          window.recaptchaWidgetId = widgetId;
+          console.log("reCAPTCHA rendered.");
+        });
+      } catch (e) {
+        console.error("reCAPTCHA Error:", e);
+        if (errorBox) {
+            errorBox.textContent = "Could not load reCAPTCHA. Please check your network or refresh.";
+            errorBox.style.display = "block";
+        }
+      }
+    }
+
+    // --- Smart Login/Logout Button ---
+    
 
     // Close modal
     closeModal?.addEventListener("click", () => {
@@ -149,7 +150,15 @@
       }
 
       const fullPhone = "+91" + number;
+      
+      // --- FIXED: Ensure appVerifier exists ---
+      if (!window.recaptchaVerifier) {
+          errorBox.textContent = "reCAPTCHA not loaded. Please refresh.";
+          errorBox.style.display = "block";
+          return;
+      }
       const appVerifier = window.recaptchaVerifier;
+      // --- End of Fix ---
 
       sendOtpBtn.disabled = true;
       sendOtpBtn.textContent = "Sending...";
@@ -158,15 +167,21 @@
       firebase.auth().signInWithPhoneNumber(fullPhone, appVerifier)
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
-          phoneStep.style.display = "none";
-          otpStep.style.display = "block";
-          errorBox.style.display = "none";
+          if (phoneStep) phoneStep.style.display = "none";
+          if (otpStep) otpStep.style.display = "block";
+          if (errorBox) errorBox.style.display = "none";
           alert("OTP sent successfully!");
         })
         .catch((error) => {
           console.error("Error sending OTP:", error);
-          errorBox.textContent = "Error: " + error.message;
-          errorBox.style.display = "block";
+          if (errorBox) {
+            errorBox.textContent = "Error: " + error.message;
+            errorBox.style.display = "block";
+          }
+          // Reset reCAPTCHA if it fails
+          if (window.recaptchaVerifier) {
+             window.recaptchaVerifier.render().catch(err => console.error("Recaptcha reset error", err));
+          }
         })
         .finally(() => {
             sendOtpBtn.disabled = false;
@@ -187,6 +202,14 @@
       verifyOtpBtn.disabled = true;
       verifyOtpBtn.textContent = "Verifying...";
       errorBox.style.display = "none";
+      
+      if (!window.confirmationResult) {
+          errorBox.textContent = "Please send an OTP first.";
+          errorBox.style.display = "block";
+          verifyOtpBtn.disabled = false;
+          verifyOtpBtn.textContent = "Verify & Login";
+          return;
+      }
 
       window.confirmationResult.confirm(code)
         .then((result) => {
@@ -198,15 +221,20 @@
           successBox.textContent = "✅ Phone verified successfully!";
           successBox.style.display = "block";
 
-          // --- NEW: Update UI with user data ---
+          // --- Update UI with user data ---
           updateUserUI(user);
           
           setTimeout(() => {
-            modal.style.display = "none";
-            phoneStep.style.display = "block";
-            otpStep.style.display = "none";
-            otpInput.value = "";
-            phoneInput.value = "";
+            // If on the login page, redirect to home. Otherwise, just close modal.
+            if (window.location.pathname.endsWith('/login.html')) {
+              window.location.href = 'index.html';
+            } else if (modal) {
+              modal.style.display = "none";
+              phoneStep.style.display = "block";
+              otpStep.style.display = "none";
+              otpInput.value = "";
+              phoneInput.value = "";
+            }
           }, 1500);
           
           if (typeof window.onLoginVerified === 'function') {
@@ -221,7 +249,7 @@
         })
         .finally(() => {
             verifyOtpBtn.disabled = false;
-            verifyOtpBtn.textContent = "Verify";
+            verifyOtpBtn.textContent = "Verify & Login";
         });
     });
     
@@ -235,23 +263,20 @@
       } else {
         console.log("User is not logged in.");
         try { sessionStorage.removeItem('isVerified'); } catch (e) {}
-        // --- NEW: Reset UI on logout ---
+        // --- Reset UI on logout ---
         updateUserUI(null);
       }
     });
+    
+    // Expose the showLoginModal function globally (for the old modal)
+    window.LoginModal = {
+      show: showOldLoginModal
+    };
 
   } // end setupLoginModal
+  
+  // Run setup *after* the header is loaded
+  // This waits for the 'headerLoaded' event we created in js/header.js
+  document.addEventListener("headerLoaded", setupLoginModal);
 
-  // Run setup after DOM is loaded
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupLoginModal);
-  } else {
-    setupLoginModal();
-  }
-
-  // Expose the showLoginModal function globally
-  window.LoginModal = {
-    show: showLoginModal
-  };
-
-})();
+})(); // <-- This is the closing brace for the IIFE

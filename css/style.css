@@ -2507,8 +2507,11 @@ textarea.form-input {
     flex-direction: column;
     gap: 0;
   }
-  #navLinks.open {
-    /* This style is set by js/header.js */
+ #navLinks.open {
+    /* Styles for the expanded mobile menu */
+    height: auto; /* Let it expand to fit content */
+    opacity: 1;
+    transform: translateY(0);
   }
   #navLinks a {
     display: block;
@@ -2607,4 +2610,149 @@ textarea.form-input {
   .header-user-controls {
     display: none;
   }
+}
+/* ---------- NEW: Login Page Styles ---------- */
+
+.login-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column on mobile */
+  gap: 30px;
+  max-width: 900px;
+  margin: 40px auto;
+  align-items: center;
+}
+
+.login-art {
+  display: none; /* Hide art on mobile */
+  text-align: center;
+}
+
+.login-art img {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.login-card {
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px 40px;
+  max-width: 480px;
+  margin: 0 auto; /* Center card on mobile */
+  width: 100%;
+}
+
+/* On desktop, show 2 columns */
+@media (min-width: 768px) {
+  .login-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+  .login-art {
+    display: block;
+  }
+  .login-card {
+    margin: 0; /* Align to grid */
+  }
+}
+
+/* Make form elements full-width */
+.login-card .form-input {
+  width: 100%;
+  padding: 12px 14px;
+}
+
+.login-card #recaptcha-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+/* ---------- FIX for login.html page layout ---------- */
+
+.phone-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.phone-prefix {
+  flex: 0 0 auto; /* Don't grow, don't shrink */
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg-soft);
+  border: 1px solid rgba(0,0,0,.10);
+  font-family: 'Urbanist', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.login-card .form-input {
+  /* This overrides the base width: 100% */
+  width: auto;
+  flex: 1; /* Grow to fill remaining space */
+}
+
+/* This ensures the button gradient is applied correctly */
+.login-card .cta-button {
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+}
+/* ---------- NEW: Account Page Styles ---------- */
+
+.account-layout {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.account-card {
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px 40px;
+}
+
+.account-balance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  background: var(--bg-soft);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.account-balance i {
+  font-size: 20px;
+  color: var(--brand);
+}
+
+.account-balance span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.account-balance strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--brand);
+}
+
+.logout-btn {
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 2px solid var(--danger);
+  background: #fff;
+  color: var(--danger);
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: var(--danger);
+  color: #fff;
 }

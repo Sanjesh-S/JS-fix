@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>WorthyTen - Login or Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body data-step="1"> <div id="header"></div>
+<div class="steps-bar-track" id="loginPageStepsBar" style="display: none;"></div>
+
+<script src="js/header.js"></script>
+
+<div class="main-container">
+  <div class="login-layout">
+    
+    <div class="login-art">
+      <img src="https://i.imgur.com/g003YXR.png" alt="Sell your device easily" />
+    </div>
+    
+    <div class="login-card">
+      <h1 class="product-title" style="text-align: center; margin-bottom: 8px;">Login or Sign Up</h1>
+      <p class="pickup-modal-subtitle" style="margin-top: 0; margin-bottom: 24px;">Get access to your account and saved coins.</p>
+
+      <div id="login-step-phone">
+        <div class="form-group">
+          <label for="login-phone" style="font-weight: 600;">Enter mobile number</label>
+          
+          <div class="phone-input-group">
+            <span class="phone-prefix">+91</span>
+            <input id="login-phone" type="tel" class="form-input" placeholder="Enter 10-digit mobile" maxlength="10" />
+          </div>
+          
+        </div>
+        <div id="recaptcha-container" style="margin-top: 12px;"></div>
+        <div class="pickup-modal-actions" style="justify-content: center; margin-top: 12px;">
+          <button id="send-otp-btn" class="cta-button" style="width: 100%;">Send OTP</button>
+        </div>
+      </div>
+
+      <div id="login-step-otp" style="display:none; margin-top:12px;">
+        <div class="form-group">
+          <label for="login-otp" style="font-weight: 600;">Enter 6-digit OTP</label>
+          <input id="login-otp" type="tel" class="form-input" maxlength="6" placeholder="123456" />
+        </div>
+        <div class="pickup-modal-actions" style="justify-content: center; margin-top: 12px;">
+          <button id="verify-otp-btn" class="cta-button" style="width: 100%;">Verify & Login</button>
+        </div>
+        <a href="#" id="resend-otp-link" style="text-align: center; display: block; margin-top: 16px; font-size: 14px;">Resend OTP</a>
+      </div>
+
+      <div id="login-error" style="color:var(--danger); margin-top:16px; display:none; text-align:center;"></div>
+      <div id="login-success" style="color:var(--ok); margin-top:16px; display:none; text-align:center;"></div>
+
+      <p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 24px; line-height: 1.5;">
+        By continuing, you agree to our
+        <a href="#" style="font-weight: 600; text-decoration: underline;">Terms of Service</a> &
+        <a href="#" style="font-weight: 600; text-decoration: underline;">Privacy Policy</a>.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/ui.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script defer src="js/firebase-config.js"></script>
+<script defer src="js/login.js"></script>
+</body>
+</html>

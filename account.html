@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>WorthyTen - My Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="header"></div>
+<script src="js/header.js"></script>
+
+<div class="main-container">
+  <div class="account-layout">
+    <div class="account-card">
+      <h1 class="product-title" style="text-align: center;">My Account</h1>
+      
+      <div class="account-balance">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Your Coins:</span>
+        <strong id="account-coin-balance">...</strong>
+      </div>
+
+      <form id="account-form">
+        <div class="form-group">
+          <label for="account-phone">Mobile Number (Cannot be changed)</label>
+          <input type="tel" id="account-phone" class="form-input" readonly disabled />
+        </div>
+        <div class="form-group">
+          <label for="account-name">Full Name</label>
+          <input type="text" id="account-name" class="form-input" placeholder="Enter your full name" />
+        </div>
+        <div class="form-group">
+          <label for="account-email">Email Address</label>
+          <input type="email" id="account-email" class="form-input" placeholder="Enter your email" />
+        </div>
+        
+        <p id="account-form-status" style="display: none; text-align: center; font-weight: 600;"></p>
+
+        <div class="pickup-modal-actions" style="margin-top: 20px;">
+          <button type="submit" id="save-profile-btn" class="cta-button">Save Profile</button>
+        </div>
+      </form>
+      
+      <hr class="sidebar-divider" style="margin: 24px 0;">
+      
+      <div class="pickup-modal-actions" style="justify-content: center;">
+        <button type="button" id="logout-btn" class="logout-btn">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/ui.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script defer src="js/firebase-config.js"></script>
+<script defer src="js/login.js"></script> <script defer src="js/account.js"></script> </body>
+</html>

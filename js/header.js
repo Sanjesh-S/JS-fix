@@ -1,5 +1,13 @@
-// js/header.js
+// js/header.js (FIXED)
 (function injectHeader() {
+  
+  // This function now runs *after* the HTML is loaded
+  function runInit() {
+    injectProgress();
+    // NEW: Dispatch a custom event so other scripts know the header is ready
+    document.dispatchEvent(new Event('headerLoaded'));
+  }
+
   // Inject header HTML if not present already (for standalone pages)
   if (!document.querySelector('.site-header')) {
     fetch('header.html')
@@ -7,14 +15,13 @@
       .then(html => {
         const holder = document.getElementById('header');
         if (holder) holder.innerHTML = html;
-        injectProgress();
+        runInit(); // Call after injection
       })
       .catch(() => {
-        // Fallback if header.html not found
-        injectProgress();
+        runInit(); // Call even on failure
       });
   } else {
-    injectProgress();
+    runInit(); // Call if header was already present
   }
 
   // Simple step progress setup based on <body data-step="">
