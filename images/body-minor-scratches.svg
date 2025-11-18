@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes scratch {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .scratch { animation: scratch 2s ease-in-out infinite; }
+  </style>
+  <!-- Device body outline -->
+  <rect x="25" y="30" width="90" height="60" rx="6" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+  <!-- Surface -->
+  <rect x="30" y="35" width="80" height="50" rx="4" fill="#f3f4f6" opacity="0.3"/>
+  <!-- Minor scratches -->
+  <line class="scratch" x1="40" y1="45" x2="50" y2="48" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+  <line class="scratch" x1="85" y1="55" x2="95" y2="58" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+  <line class="scratch" x1="60" y1="70" x2="70" y2="72" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+

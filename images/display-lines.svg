@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes lineFlicker {
+      0%, 100% { opacity: 1; }
+      25% { opacity: 0.3; }
+      50% { opacity: 1; }
+      75% { opacity: 0.5; }
+    }
+    .line1 { animation: lineFlicker 1.5s ease-in-out infinite; }
+    .line2 { animation: lineFlicker 1.5s ease-in-out infinite 0.2s; }
+    .line3 { animation: lineFlicker 1.5s ease-in-out infinite 0.4s; }
+  </style>
+  <!-- Screen outline -->
+  <rect x="20" y="25" width="100" height="70" rx="4" stroke="#f59e0b" stroke-width="3" fill="none"/>
+  <!-- Screen background -->
+  <rect x="30" y="35" width="80" height="50" rx="2" fill="#fef3c7" opacity="0.3"/>
+  <!-- Vertical lines -->
+  <line class="line1" x1="45" y1="35" x2="45" y2="85" stroke="#f59e0b" stroke-width="2"/>
+  <line class="line2" x1="60" y1="35" x2="60" y2="85" stroke="#f59e0b" stroke-width="2"/>
+  <line class="line3" x1="75" y1="35" x2="75" y2="85" stroke="#f59e0b" stroke-width="2"/>
+  <line class="line1" x1="90" y1="35" x2="90" y2="85" stroke="#f59e0b" stroke-width="2"/>
+</svg>
+

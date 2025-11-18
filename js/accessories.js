@@ -41,10 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!accessoriesGrid || !nextButton) return;
 
   const accessories = [
-    { id:'adapter', label:'Original Adapter with cable', img:'images/acc-adapter.png', bonus:250 },
-    { id:'bill',    label:'Bill',                         img:'images/acc-bill.png',    bonus:200 },
-    { id:'box',     label:'Box',                          img:'images/acc-box.png',     bonus:300 },
-    { id:'battery', label:'Additional Battery',           img:'images/acc-battery.png', bonus:400 }
+    { id:'adapter', label:'Original Adapter', img:'images/acc-adapter.svg', bonus:250 },
+    { id:'battery', label:'Original Battery', img:'images/acc-battery.svg', bonus:400 },
+    { id:'box',     label:'Original Box',     img:'images/acc-box.svg',     bonus:300 },
+    { id:'bag',     label:'Original Bag',     img:'images/acc-bag.svg',     bonus:200 },
+    { id:'cable',   label:'Original Cable',   img:'images/acc-cable.svg',   bonus:150 },
+    { id:'tripod',  label:'Original Tripod',  img:'images/acc-tripod.svg',  bonus:350 },
+    { id:'manual',  label:'Original Manual',  img:'images/acc-manual.svg',   bonus:100 },
+    { id:'sim',     label:'Original SIM Card', img:'images/acc-sim.svg',      bonus:50 }
   ];
 
   let selected = new Set(vd.accessories || []);

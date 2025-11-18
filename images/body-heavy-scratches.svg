@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes heavyScratch {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+    .scratch { animation: heavyScratch 1.5s ease-in-out infinite; }
+  </style>
+  <!-- Device body outline -->
+  <rect x="25" y="30" width="90" height="60" rx="6" stroke="#f59e0b" stroke-width="3" fill="none"/>
+  <!-- Surface with damage -->
+  <rect x="30" y="35" width="80" height="50" rx="4" fill="#fef3c7" opacity="0.3"/>
+  <!-- Heavy scratches -->
+  <line class="scratch" x1="35" y1="40" x2="55" y2="45" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line class="scratch" x1="50" y1="50" x2="75" y2="55" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line class="scratch" x1="70" y1="60" x2="95" y2="65" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line class="scratch" x1="45" y1="70" x2="70" y2="75" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Paint peel effect -->
+  <path class="scratch" d="M 80 45 Q 85 40, 90 45" stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="2,2"/>
+</svg>
+

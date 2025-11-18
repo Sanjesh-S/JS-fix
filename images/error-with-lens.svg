@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes errorFlash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .error { animation: errorFlash 1.5s ease-in-out infinite; }
+  </style>
+  <!-- Camera body -->
+  <rect x="30" y="35" width="80" height="50" rx="5" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <!-- Lens with error -->
+  <circle cx="70" cy="60" r="18" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <circle class="error" cx="70" cy="60" r="12" fill="#fee2e2" opacity="0.5"/>
+  <!-- Error X -->
+  <line class="error" x1="63" y1="53" x2="77" y2="67" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+  <line class="error" x1="77" y1="53" x2="63" y2="67" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+  <!-- Lens attached indicator -->
+  <rect x="50" y="75" width="40" height="8" rx="2" stroke="#ef4444" stroke-width="2" fill="none"/>
+</svg>
+

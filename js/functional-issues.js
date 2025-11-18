@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const proceedBtn   = document.getElementById('proceedToAccessoriesBtn');
 
   const issues = [
-    { id: 'battery',     label: 'Battery weak or Not working or Duplicate', img: 'images/issue-battery.png',     deduction: 0.15 },
-    { id: 'flashlight',  label: 'Flashlight not Working',                    img: 'images/issue-flashlight.png',   deduction: 0.05 },
-    { id: 'memory_slot', label: 'Memory Card Slot issue',                    img: 'images/issue-memory-card.png',  deduction: 0.20 },
-    { id: 'speaker',     label: 'Speaker not working',                       img: 'images/issue-speaker.png',      deduction: 0.10 },
-    { id: 'connectors',  label: 'Connectors not working',                    img: 'images/issue-connectors.png',   deduction: 0.15 },
-    { id: 'buttons',     label: 'Buttons not working',                       img: 'images/issue-buttons.png',      deduction: 0.10 }
+    { id: 'battery',     label: 'Battery weak or Not working or Duplicate', img: 'images/issue-battery.svg',     deduction: 0.15 },
+    { id: 'flashlight',  label: 'Flashlight not Working',                    img: 'images/issue-flashlight.svg',   deduction: 0.05 },
+    { id: 'memory_slot', label: 'Memory Card Slot issue',                    img: 'images/issue-memory-card.svg',  deduction: 0.20 },
+    { id: 'speaker',     label: 'Speaker not working',                       img: 'images/issue-speaker.svg',      deduction: 0.10 },
+    { id: 'connectors',  label: 'Connectors not working',                    img: 'images/issue-connectors.svg',   deduction: 0.15 },
+    { id: 'buttons',     label: 'Buttons not working',                       img: 'images/issue-buttons.svg',      deduction: 0.10 }
   ];
   const selected = new Set();
   let noIssuesSelected = false; // NEW: Track "No Issues" state

@@ -25,31 +25,31 @@ document.addEventListener("DOMContentLoaded", () => {
   if (evaluationImage && vd.imageUrl) evaluationImage.src = vd.imageUrl;
   if (evaluationModel) evaluationModel.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
 
-  // Options (kept your images/labels)
+  // Options with animated SVG images
   const conditions = {
     display: [
-      { id: 'display_good',   label: 'Good Condition',                 img: 'images/display-good.png',        deduction: 0 },
-      { id: 'display_fade',   label: 'Display Fade Condition',         img: 'images/display-fade.png',        deduction: 0.15 },
-      { id: 'display_lines',  label: 'Display Lines Condition',        img: 'images/display-lines.png',       deduction: 0.25 },
-      { id: 'display_broken', label: 'Display Not Working',            img: 'images/display-not-working.png', deduction: 0.40 }
+      { id: 'display_good',   label: 'Good Condition',                 img: 'images/display-good.svg',        deduction: 0 },
+      { id: 'display_fade',   label: 'Display Fade Condition',         img: 'images/display-fade.svg',        deduction: 0.15 },
+      { id: 'display_lines',  label: 'Display Lines Condition',        img: 'images/display-lines.svg',       deduction: 0.25 },
+      { id: 'display_broken', label: 'Display Not Working',            img: 'images/display-not-working.svg', deduction: 0.40 }
     ],
     body: [
-      { id: 'body_good',   label: 'No Defects',                        img: 'images/body-no-defects.png',     deduction: 0 },
-      { id: 'body_minor',  label: 'Minor Scratches/ less than 2',      img: 'images/body-minor-scratches.png', deduction: 0.10 },
-      { id: 'body_heavy',  label: 'Heavy Scratches/ paint Peel off',   img: 'images/body-heavy-scratches.png', deduction: 0.20 },
-      { id: 'body_broken', label: 'Broken/ Crack',                     img: 'images/body-broken.png',         deduction: 0.50 }
+      { id: 'body_good',   label: 'No Defects',                        img: 'images/body-no-defects.svg',     deduction: 0 },
+      { id: 'body_minor',  label: 'Minor Scratches/ less than 2',      img: 'images/body-minor-scratches.svg', deduction: 0.10 },
+      { id: 'body_heavy',  label: 'Heavy Scratches/ paint Peel off',   img: 'images/body-heavy-scratches.svg', deduction: 0.20 },
+      { id: 'body_broken', label: 'Broken/ Crack',                     img: 'images/body-broken.svg',         deduction: 0.50 }
     ],
     error: [
-      { id: 'error_no',       label: 'No Error Condition',             img: 'images/error-no.png',            deduction: 0 },
-      { id: 'error_with_lens',label: 'With Lens Error Condition',      img: 'images/error-with-lens.png',     deduction: 0.30 },
-      { id: 'error_no_lens',  label: 'Without Lens Error Condition',   img: 'images/error-without-lens.png',  deduction: 0.35 }
+      { id: 'error_no',       label: 'No Error Condition',             img: 'images/error-no.svg',            deduction: 0 },
+      { id: 'error_with_lens',label: 'With Lens Error Condition',      img: 'images/error-with-lens.svg',     deduction: 0.30 },
+      { id: 'error_no_lens',  label: 'Without Lens Error Condition',   img: 'images/error-without-lens.svg',  deduction: 0.35 }
     ],
     // supports old "lense" images but normalizes key as "lens"
     lens: [
-      { id: 'lense_good',        label: 'Good Condition',                 img: 'images/lense-good.png',          deduction: 0 },
-      { id: 'lense_focus_issue', label: 'Auto Focus/ Manual Focus Issue', img: 'images/lense-focus-issue.png',   deduction: 0.25 },
-      { id: 'lense_fungus',      label: 'Fungus issue',                   img: 'images/lense-fungus.png',        deduction: 0.30 },
-      { id: 'lense_scratches',   label: 'Scratches',                      img: 'images/lense-scratches.png',     deduction: 0.20 }
+      { id: 'lense_good',        label: 'Good Condition',                 img: 'images/lense-good.svg',          deduction: 0 },
+      { id: 'lense_focus_issue', label: 'Auto Focus/ Manual Focus Issue', img: 'images/lense-focus-issue.svg',   deduction: 0.25 },
+      { id: 'lense_fungus',      label: 'Fungus issue',                   img: 'images/lense-fungus.svg',        deduction: 0.30 },
+      { id: 'lense_scratches',   label: 'Scratches',                      img: 'images/lense-scratches.svg',     deduction: 0.20 }
     ]
   };
   

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Battery outline -->
+  <rect x="30" y="25" width="60" height="35" rx="3" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Battery positive terminal -->
+  <rect x="88" y="32" width="8" height="21" rx="2" fill="#1a1a1a"/>
+  <!-- Battery level indicator -->
+  <rect x="35" y="30" width="50" height="25" rx="2" fill="#33c68d" opacity="0.3"/>
+  <!-- Lightning bolt inside -->
+  <path d="M 50 35 L 60 50 L 55 50 L 70 85 L 60 70 L 65 70 L 50 55 Z" fill="#33c68d" stroke="#1a1a1a" stroke-width="1.5"/>
+</svg>
+

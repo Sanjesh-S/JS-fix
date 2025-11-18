@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Box base -->
+  <rect x="25" y="40" width="70" height="50" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Box lid (open) -->
+  <rect x="25" y="40" width="70" height="15" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <rect x="27" y="42" width="66" height="11" rx="1" fill="#33c68d" opacity="0.3"/>
+  <!-- Lid hinge/connection -->
+  <line x1="25" y1="40" x2="25" y2="35" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="95" y1="40" x2="95" y2="35" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Lid top view -->
+  <rect x="25" y="35" width="70" height="8" rx="1" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+</svg>
+

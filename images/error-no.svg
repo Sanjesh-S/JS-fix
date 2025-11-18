@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .checkmark { animation: pulse 2s ease-in-out infinite; }
+  </style>
+  <!-- Camera body -->
+  <rect x="30" y="35" width="80" height="50" rx="5" stroke="#10b981" stroke-width="3" fill="none"/>
+  <!-- Lens -->
+  <circle cx="70" cy="60" r="18" stroke="#10b981" stroke-width="3" fill="none"/>
+  <circle cx="70" cy="60" r="12" fill="#d1fae5" opacity="0.3"/>
+  <!-- Checkmark -->
+  <path class="checkmark" d="M 65 60 L 70 65 L 75 55" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+

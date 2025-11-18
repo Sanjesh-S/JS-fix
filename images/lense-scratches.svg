@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes scratch {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    .scratch { animation: scratch 2s ease-in-out infinite; }
+  </style>
+  <!-- Lens outline -->
+  <circle cx="70" cy="70" r="35" stroke="#f59e0b" stroke-width="3" fill="none"/>
+  <!-- Lens glass -->
+  <circle cx="70" cy="70" r="28" fill="#fef3c7" opacity="0.2"/>
+  <!-- Scratches -->
+  <line class="scratch" x1="55" y1="60" x2="65" y2="65" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line class="scratch" x1="70" y1="55" x2="80" y2="60" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line class="scratch" x1="75" y1="70" x2="85" y2="75" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line class="scratch" x1="60" y1="80" x2="70" y2="85" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <!-- Circular scratch -->
+  <path class="scratch" d="M 65 65 Q 70 60, 75 65" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
+</svg>
+

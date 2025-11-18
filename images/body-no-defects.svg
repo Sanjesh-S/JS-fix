@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes glow {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 3px #10b981); }
+      50% { opacity: 0.8; filter: drop-shadow(0 0 6px #10b981); }
+    }
+    .checkmark { animation: glow 2s ease-in-out infinite; }
+  </style>
+  <!-- Device body outline -->
+  <rect x="25" y="30" width="90" height="60" rx="6" stroke="#10b981" stroke-width="3" fill="none"/>
+  <!-- Smooth surface -->
+  <rect x="30" y="35" width="80" height="50" rx="4" fill="#d1fae5" opacity="0.2"/>
+  <!-- Checkmark -->
+  <circle cx="70" cy="60" r="15" fill="#d1fae5" opacity="0.5"/>
+  <path class="checkmark" d="M 63 60 L 68 65 L 77 56" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+

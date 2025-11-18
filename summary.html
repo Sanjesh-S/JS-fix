@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>WorthyTen - Summary</title>
+<title>WorthyTen - Quote Confirmation</title>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
@@ -20,75 +20,233 @@
 
 <script src="js/header.js"></script>
 <script src="js/ui.js"></script>
-<div class="main-container">
 
-  <div class="assessment-layout">
+<div class="main-container">
   
-    <div class="summary-device-card">
-      <h1 class="product-title">Your Quote Summary</h1>
-      <img alt="Device" id="sumImage" src="https://via.placeholder.com/250"/>
-      <h2 class="model-name" id="sumModel">Model</h2>
-      <p class="selling-price-label">Selling price:</p>
-      <p class="final-selling-price" id="finalSellingPrice">₹0</p>
-      <a href="index.html" class="recalculate-link">Recalculate</a>
+  <!-- Confirmation Header -->
+  <div class="confirmation-header">
+    <div class="confirmation-icon">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <h1 class="confirmation-title">Your Quote is Ready!</h1>
+    <p class="confirmation-subtitle">We've evaluated your device and prepared a final offer. Review the details below.</p>
+    <div class="quote-id">
+      <span class="quote-id-label">Quote ID:</span>
+      <span class="quote-id-value" id="quoteId">WT-<span id="quoteNumber"></span></span>
+    </div>
+  </div>
+
+  <!-- Main Content Grid -->
+  <div class="confirmation-layout">
+    
+    <!-- Left Column: Device & Actions -->
+    <div class="confirmation-main">
       
-      <div class="feature-icons">
-        <div class="feature-item">
-          <i class="fa-solid fa-bolt"></i>
-          <span>Fast Payments</span>
+      <!-- Device Information Card -->
+      <div class="device-info-card">
+        <div class="device-header">
+          <h2 class="device-card-title">Device Information</h2>
+          <a href="index.html" class="edit-link">
+            <i class="fa-solid fa-pencil"></i>
+            <span>Edit</span>
+          </a>
         </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-truck"></i>
-          <span>Free Pickup</span>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-shield-halved"></i>
-          <span>100% Safe</span>
+        
+        <div class="device-content">
+          <div class="device-image-wrapper">
+            <img alt="Device" id="sumImage" src="https://via.placeholder.com/250"/>
+          </div>
+          <div class="device-details">
+            <h3 class="device-name" id="sumModel">Model</h3>
+            <div class="device-specs">
+              <div class="spec-item">
+                <i class="fa-solid fa-tag"></i>
+                <span id="deviceBrandModel">Brand Model</span>
+              </div>
+              <div class="spec-item">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Quote Valid for 7 Days</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <a class="cta-button sell-now-btn desktop-only" href="#" id="bookPickupBtnDesktop">Sell Now</a>
-    </div>
 
-    
-    <div class="evaluation-sidebar">
-      <div class="price-summary-widget" id="desktopPriceSummaryWidget">
-        <h3>Price Summary</h3>
+      <!-- Price Highlight Card -->
+      <div class="price-highlight-card">
+        <div class="price-header">
+          <span class="price-label">Final Offer Price</span>
+          <span class="price-badge">Best Price</span>
         </div>
-      
-      <hr class="sidebar-divider">
+        <div class="price-amount" id="finalSellingPrice">₹0</div>
+        <p class="price-note">This is the final amount you'll receive after device inspection.</p>
+      </div>
 
-      <h3 class="sidebar-title">Device Evaluation</h3>
-      <h4 class="sidebar-model" id="evaluationModel">Device Model</h4>
-      <ul class="summary-breakdown-list" id="summaryBreakdownList">
-         </ul>
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a class="cta-button primary-action" href="#" id="bookPickupBtnDesktop">
+          <i class="fa-solid fa-hand-holding-dollar"></i>
+          <span>Proceed to Sell</span>
+        </a>
+        <div class="secondary-actions">
+          <button class="action-btn secondary" id="printQuoteBtn">
+            <i class="fa-solid fa-print"></i>
+            <span>Print Quote</span>
+          </button>
+          <button class="action-btn secondary" id="shareQuoteBtn">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Share Quote</span>
+          </button>
+          <a href="index.html" class="action-btn secondary">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Recalculate</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Trust Features -->
+      <div class="trust-features">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div class="trust-content">
+            <h4>Fast Payments</h4>
+            <p>Receive payment within 24 hours after inspection</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fa-solid fa-truck"></i>
+          </div>
+          <div class="trust-content">
+            <h4>Free Pickup</h4>
+            <p>We'll collect your device at no extra cost</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div class="trust-content">
+            <h4>100% Safe & Secure</h4>
+            <p>Your data and device are completely protected</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-  </div> </div>
-<script src="js/state-helper.js"></script>
+    <!-- Right Column: Price Breakdown & Details -->
+    <div class="confirmation-sidebar">
+      
+      <!-- Price Summary Card -->
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <h3 class="summary-card-title">
+            <i class="fa-solid fa-receipt"></i>
+            <span>Price Breakdown</span>
+          </h3>
+        </div>
+        <div class="summary-card-body" id="desktopPriceSummaryWidget">
+          <!-- Price rows will be inserted here by JS -->
+        </div>
+      </div>
 
-<div class="mobile-sticky-footer" id="mobileFooter">
-  <div class="mobile-footer-price">
-    <span id="mobileFinalPrice">₹0</span>
-    <a href="#" id="viewBreakupBtn">View Breakup</a>
+      <!-- Evaluation Details Card -->
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <h3 class="summary-card-title">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Evaluation Details</span>
+          </h3>
+        </div>
+        <div class="summary-card-body">
+          <div class="evaluation-device">
+            <h4 class="evaluation-device-name" id="evaluationModel">Device Model</h4>
+          </div>
+          <ul class="evaluation-breakdown" id="summaryBreakdownList">
+            <!-- Breakdown items will be inserted here by JS -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Next Steps Card -->
+      <div class="summary-card next-steps">
+        <div class="summary-card-header">
+          <h3 class="summary-card-title">
+            <i class="fa-solid fa-list-check"></i>
+            <span>What's Next?</span>
+          </h3>
+        </div>
+        <div class="summary-card-body">
+          <ol class="steps-list">
+            <li>
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <strong>Click "Proceed to Sell"</strong>
+                <p>Schedule a free pickup at your convenience</p>
+              </div>
+            </li>
+            <li>
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <strong>Device Inspection</strong>
+                <p>Our expert will verify the device condition</p>
+              </div>
+            </li>
+            <li>
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <strong>Get Paid</strong>
+                <p>Receive payment within 24 hours</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+
   </div>
-  <a href="#" class="cta-button" id="bookPickupBtnMobile">Sell Now</a>
+
 </div>
 
+<script src="js/state-helper.js"></script>
+
+<!-- Mobile Footer -->
+<div class="mobile-sticky-footer" id="mobileFooter">
+  <div class="mobile-footer-content">
+    <div class="mobile-price">
+      <span class="mobile-price-label">Final Price</span>
+      <span class="mobile-price-amount" id="mobileFinalPrice">₹0</span>
+    </div>
+    <a href="#" class="cta-button mobile-action" id="bookPickupBtnMobile">
+      <i class="fa-solid fa-hand-holding-dollar"></i>
+      <span>Sell Now</span>
+    </a>
+  </div>
+</div>
+
+<!-- Price Summary Modal (Mobile) -->
 <div class="price-summary-modal-backdrop" id="priceSummaryModal">
   <div class="price-summary-modal-content">
     <div class="price-summary-modal-header">
-      <h3>Price Summary</h3>
-      <button id="closeSummaryModalBtn">✕</button>
+      <h3>Price Breakdown</h3>
+      <button id="closeSummaryModalBtn" class="modal-close-btn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
     <div id="modalPriceSummaryWidget"></div>
   </div>
 </div>
 
-
+<!-- Pickup Modal -->
 <div class="pickup-modal-backdrop" id="pickupModal" style="display:none;">
   <div class="pickup-modal-content">
-    <button type="button" class="pickup-modal-close" id="modalCloseBtn">✕</button>
+    <button type="button" class="pickup-modal-close" id="modalCloseBtn">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
     <div id="pickup-step-1">
       <h2 class="pickup-modal-title">Enter Pickup Details</h2>
       <p class="pickup-modal-subtitle">Where can we pick up your device?</p>
@@ -130,6 +288,8 @@
     </div>
   </div>
 </div>
+
+<!-- City Popup -->
 <div class="city-popup-overlay" id="city-popup" style="display: none;">
   <div class="city-popup-content">
     <div class="city-popup-header"><h3>Select your City</h3><button type="button" class="city-popup-close" id="city-popup-close">✕</button></div>
@@ -137,6 +297,7 @@
     <ul class="city-popup-list" id="city-list"></ul>
   </div>
 </div>
+
 <script src="js/summary.js"></script>
 
 </body>

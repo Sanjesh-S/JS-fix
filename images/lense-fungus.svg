@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes fungus {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .fungus { animation: fungus 2s ease-in-out infinite; }
+  </style>
+  <!-- Lens outline -->
+  <circle cx="70" cy="70" r="35" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <!-- Lens glass -->
+  <circle cx="70" cy="70" r="28" fill="#fee2e2" opacity="0.3"/>
+  <!-- Fungus spots -->
+  <circle class="fungus" cx="60" cy="60" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle class="fungus" cx="75" cy="65" r="3" fill="#ef4444" opacity="0.7"/>
+  <circle class="fungus" cx="65" cy="75" r="3.5" fill="#ef4444" opacity="0.7"/>
+  <circle class="fungus" cx="80" cy="70" r="2.5" fill="#ef4444" opacity="0.7"/>
+  <circle class="fungus" cx="70" cy="80" r="3" fill="#ef4444" opacity="0.7"/>
+  <!-- Fungus web pattern -->
+  <path class="fungus" d="M 60 60 Q 70 65, 75 65" stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path class="fungus" d="M 65 75 Q 70 70, 80 70" stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.6"/>
+</svg>
+

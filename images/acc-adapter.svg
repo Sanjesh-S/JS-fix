@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Power Adapter -->
+  <rect x="20" y="30" width="50" height="35" rx="4" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <rect x="25" y="35" width="40" height="25" rx="2" fill="#33c68d" opacity="0.3"/>
+  <!-- Three prongs on right -->
+  <line x1="70" y1="40" x2="80" y2="40" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="70" y1="47.5" x2="80" y2="47.5" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="70" y1="55" x2="80" y2="55" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cable coiled on left -->
+  <path d="M 20 47.5 Q 10 40, 5 47.5 Q 0 55, 10 62.5 Q 20 70, 15 77.5" stroke="#33c68d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="12" cy="60" r="2" fill="#33c68d"/>
+</svg>
+

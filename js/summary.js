@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const imgEl = document.getElementById('sumImage');
   const modelEl = document.getElementById('sumModel');
   const finalSellingPriceEl = document.getElementById('finalSellingPrice');
+  const deviceBrandModel = document.getElementById('deviceBrandModel');
+  const quoteNumber = document.getElementById('quoteNumber');
   
   // --- Price Summary Widget (Desktop) ---
   const desktopPriceSummaryWidget = document.getElementById('desktopPriceSummaryWidget');
@@ -51,6 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Sidebar Elements ---
   const evaluationModel = document.getElementById('evaluationModel');
   const breakdownListEl = document.getElementById('summaryBreakdownList'); // Detailed list
+  
+  // --- Generate Quote ID ---
+  if (quoteNumber) {
+    const randomId = Math.floor(100000 + Math.random() * 900000);
+    quoteNumber.textContent = randomId.toString();
+  }
   
   // --- Mobile Footer Elements ---
   const mobileFinalPriceEl = document.getElementById('mobileFinalPrice');
@@ -69,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (imgEl && vd.imageUrl) imgEl.src = vd.imageUrl;
   if (modelEl) modelEl.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
   if (finalSellingPriceEl) finalSellingPriceEl.textContent = money(finalPrice);
+  if (deviceBrandModel) deviceBrandModel.textContent = `${vd.brandName || ''} ${vd.modelName || ''}`.trim();
   
   // --- Populate Mobile Footer ---
   if (mobileFinalPriceEl) mobileFinalPriceEl.textContent = money(finalPrice);
@@ -494,5 +503,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  // --- Print Quote Handler ---
+  const printQuoteBtn = document.getElementById('printQuoteBtn');
+  if (printQuoteBtn) {
+    printQuoteBtn.addEventListener('click', () => {
+      window.print();
+    });
+  }
+
+  // --- Share Quote Handler ---
+  const shareQuoteBtn = document.getElementById('shareQuoteBtn');
+  if (shareQuoteBtn) {
+    shareQuoteBtn.addEventListener('click', () => {
+      const quoteId = document.getElementById('quoteId')?.textContent || 'Quote';
+      const shareText = `Check out my device quote from WorthyTen: ${quoteId} - ${vd.brandName || ''} ${vd.modelName || ''} - ${money(finalPrice)}`;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'My Device Quote - WorthyTen',
+          text: shareText,
+          url: window.location.href
+        }).catch(err => console.log('Error sharing:', err));
+      } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(shareText + '\n' + window.location.href).then(() => {
+          alert('Quote details copied to clipboard!');
+        }).catch(() => {
+          alert('Unable to share. Please copy the URL manually.');
+        });
+      }
+    });
   }
 });

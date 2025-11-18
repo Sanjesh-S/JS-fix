@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes blur {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    .blur { animation: blur 2s ease-in-out infinite; }
+  </style>
+  <!-- Lens outline -->
+  <circle cx="70" cy="70" r="35" stroke="#f59e0b" stroke-width="3" fill="none"/>
+  <!-- Blurred glass effect -->
+  <circle class="blur" cx="70" cy="70" r="28" fill="#fef3c7" opacity="0.4"/>
+  <!-- Focus rings (out of focus) -->
+  <circle cx="70" cy="70" r="20" stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="3,3"/>
+  <circle cx="70" cy="70" r="15" stroke="#f59e0b" stroke-width="1.5" fill="none" stroke-dasharray="2,2"/>
+  <!-- Warning symbol -->
+  <path d="M 70 55 L 75 65 L 70 70 L 65 65 Z" fill="#f59e0b" opacity="0.7"/>
+</svg>
+

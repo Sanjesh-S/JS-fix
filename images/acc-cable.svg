@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Coiled cable -->
+  <path d="M 30 40 Q 20 30, 15 40 Q 10 50, 20 60 Q 30 70, 25 80 Q 20 90, 30 100" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 35 45 Q 25 35, 20 45 Q 15 55, 25 65 Q 35 75, 30 85 Q 25 95, 35 105" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Left connector -->
+  <rect x="20" y="35" width="12" height="12" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <rect x="22" y="37" width="8" height="8" rx="1" fill="#33c68d" opacity="0.3"/>
+  <!-- Right connector -->
+  <rect x="88" y="73" width="12" height="12" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <rect x="90" y="75" width="8" height="8" rx="1" fill="#33c68d" opacity="0.3"/>
+</svg>
+

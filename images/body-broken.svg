@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes crack {
+      0%, 100% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: 4; }
+    }
+    .crack { animation: crack 1s ease-in-out infinite; }
+  </style>
+  <!-- Device body outline (broken) -->
+  <rect x="25" y="30" width="90" height="60" rx="6" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <!-- Broken pieces -->
+  <rect x="30" y="35" width="35" height="25" rx="2" fill="#fee2e2" opacity="0.3"/>
+  <rect x="70" y="35" width="40" height="30" rx="2" fill="#fee2e2" opacity="0.3"/>
+  <rect x="30" y="65" width="80" height="20" rx="2" fill="#fee2e2" opacity="0.3"/>
+  <!-- Crack lines -->
+  <path class="crack" d="M 65 35 L 65 85" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="4,2"/>
+  <path class="crack" d="M 30 60 L 110 60" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="4,2"/>
+  <path class="crack" d="M 50 40 L 75 70" stroke="#ef4444" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="3,2"/>
+</svg>
+

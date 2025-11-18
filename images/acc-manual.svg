@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Stack of three documents -->
+  <!-- Bottom document -->
+  <rect x="30" y="50" width="60" height="45" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <line x1="40" y1="60" x2="80" y2="60" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="40" y1="68" x2="80" y2="68" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="40" y1="76" x2="75" y2="76" stroke="#1a1a1a" stroke-width="1"/>
+  
+  <!-- Middle document -->
+  <rect x="32" y="48" width="60" height="45" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <line x1="42" y1="58" x2="82" y2="58" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="42" y1="66" x2="82" y2="66" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="42" y1="74" x2="77" y2="74" stroke="#1a1a1a" stroke-width="1"/>
+  
+  <!-- Top document (with teal accent) -->
+  <rect x="34" y="46" width="60" height="45" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <rect x="36" y="48" width="56" height="8" rx="1" fill="#33c68d" opacity="0.3"/>
+  <line x1="44" y1="60" x2="84" y2="60" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="44" y1="68" x2="84" y2="68" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="44" y1="76" x2="79" y2="76" stroke="#1a1a1a" stroke-width="1"/>
+</svg>
+

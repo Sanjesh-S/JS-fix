@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Receipt/Bill document -->
+  <rect x="25" y="30" width="70" height="60" rx="2" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Header line -->
+  <line x1="35" y1="45" x2="85" y2="45" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Text lines -->
+  <line x1="35" y1="55" x2="80" y2="55" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="35" y1="63" x2="75" y2="63" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="35" y1="71" x2="70" y2="71" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- Total line -->
+  <line x1="35" y1="78" x2="85" y2="78" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Teal accent on top -->
+  <rect x="25" y="30" width="70" height="12" rx="2" fill="#33c68d" opacity="0.3"/>
+</svg>
+

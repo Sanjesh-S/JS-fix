@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   const questions = [
-    { id: 'powerOn',        text: 'Does your camera power on and function properly?',                         deduction: 0.30 },
-    { id: 'bodyDamage',     text: 'Is the camera body free from major damage (cracks, dents, water damage)?', deduction: 0.25 },
-    { id: 'lcdScreen',      text: 'Is the LCD/Touchscreen working without cracks or display issues?',         deduction: 0.20 },
-    { id: 'lensCondition',  text: 'Is the lens (if included) free from scratches, fungus, or dust?',          deduction: 0.15 },
-    { id: 'autofocusZoom',  text: 'Does autofocus and zoom work properly on your camera/lens?',               deduction: 0.15 }
+    { id: 'powerOn',        text: 'Does your camera power on and function properly?',                         instruction: 'We currently only accept devices that switch on', deduction: 0.30 },
+    { id: 'bodyDamage',     text: 'Is the camera body free from major damage (cracks, dents, water damage)?', instruction: 'Check your device\'s body or buttons condition carefully', deduction: 0.25 },
+    { id: 'lcdScreen',      text: 'Is the LCD/Touchscreen working without cracks or display issues?',         instruction: 'Check your device\'s display condition carefully', deduction: 0.20 },
+    { id: 'lensCondition',  text: 'Is the lens (if included) free from scratches, fungus, or dust?',          instruction: 'Check your lens condition carefully', deduction: 0.15 },
+    { id: 'autofocusZoom',  text: 'Does autofocus and zoom work properly on your camera/lens?',               instruction: 'Check your device\'s autofocus and zoom functionality carefully', deduction: 0.15 }
   ];
 
   const questionsContainer   = document.getElementById('questionsContainer');
@@ -42,10 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderQuestions() {
     questionsContainer.innerHTML = questions.map((q, i) => `
       <div class="question-item">
-        <p class="question-text">${i+1}. ${q.text}</p>
+        <p class="question-text">${q.text}</p>
+        <p class="question-instruction">${q.instruction}</p>
         <div class="answer-options">
-          <button type="button" class="answer-btn" data-question-id="${q.id}" data-answer="yes">Yes</button>
-          <button type="button" class="answer-btn" data-question-id="${q.id}" data-answer="no">No</button>
+          <label class="radio-option-box">
+            <input type="radio" name="${q.id}" value="yes" data-question-id="${q.id}" data-answer="yes">
+            <span>Yes</span>
+          </label>
+          <label class="radio-option-box">
+            <input type="radio" name="${q.id}" value="no" data-question-id="${q.id}" data-answer="no">
+            <span>No</span>
+          </label>
         </div>
       </div>
     `).join('');
@@ -87,23 +94,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validation is now handled on click.
   }
 
-  // Delegate clicks for both buttons and any inner spans/icons
-  questionsContainer.addEventListener('click', (ev) => {
-    const btn = ev.target.closest('.answer-btn');
-    if (!btn) return;
+  // Handle radio button changes
+  questionsContainer.addEventListener('change', (ev) => {
+    const radio = ev.target;
+    if (!radio.matches('input[type="radio"]')) return;
 
-    const qid    = btn.getAttribute('data-question-id');
-    const answer = btn.getAttribute('data-answer');
+    const qid    = radio.getAttribute('data-question-id');
+    const answer = radio.getAttribute('data-answer');
 
     userAnswers[qid] = answer;
 
-    // toggle selected for this question’s two buttons
-    btn.parentElement.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
+    // Update visual state - remove selected class from all boxes in this question group
+    const questionItem = radio.closest('.question-item');
+    questionItem.querySelectorAll('.radio-option-box').forEach(box => {
+      box.classList.remove('selected');
+    });
+    // Add selected class to the checked box
+    radio.closest('.radio-option-box').classList.add('selected');
 
     calculatePriceAndStore();
-    updateProceedVisibility(); // This call remains but the function is now empty
-    updateEvaluationSidebar(); // --- NEW: Update sidebar on click ---
+    updateProceedVisibility();
+    updateEvaluationSidebar();
   });
 
   // Proceed

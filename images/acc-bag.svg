@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Bag body -->
+  <rect x="30" y="35" width="60" height="55" rx="3" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Bag handle -->
+  <path d="M 45 35 Q 50 25, 60 25 Q 70 25, 75 35" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Bag front pocket/flap -->
+  <rect x="40" y="50" width="40" height="25" rx="2" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+  <!-- Tag on front -->
+  <rect x="50" y="60" width="20" height="12" rx="1" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+  <rect x="52" y="62" width="16" height="8" rx="0.5" fill="#33c68d" opacity="0.3"/>
+  <!-- Small tag hole -->
+  <circle cx="55" cy="66" r="1" fill="#1a1a1a"/>
+</svg>
+

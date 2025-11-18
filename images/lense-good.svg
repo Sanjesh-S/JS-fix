@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes shine {
+      0% { transform: translateX(-20px); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(20px); opacity: 0; }
+    }
+    .shine { animation: shine 2s ease-in-out infinite; }
+  </style>
+  <!-- Lens outline -->
+  <circle cx="70" cy="70" r="35" stroke="#10b981" stroke-width="3" fill="none"/>
+  <!-- Lens glass -->
+  <circle cx="70" cy="70" r="28" fill="#d1fae5" opacity="0.2"/>
+  <!-- Shine effect -->
+  <ellipse class="shine" cx="70" cy="70" rx="15" ry="25" fill="#ffffff" opacity="0.4"/>
+  <!-- Center mark -->
+  <circle cx="70" cy="70" r="3" fill="#10b981"/>
+</svg>
+

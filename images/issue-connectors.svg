@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes connectorError {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .connector { animation: connectorError 1.5s ease-in-out infinite; }
+  </style>
+  <!-- USB/Connector port -->
+  <rect x="35" y="50" width="70" height="25" rx="3" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <!-- Port opening -->
+  <rect x="40" y="55" width="60" height="15" rx="2" fill="#fee2e2" opacity="0.3"/>
+  <!-- Connector pins (broken) -->
+  <line class="connector" x1="50" y1="60" x2="65" y2="60" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <line class="connector" x1="50" y1="65" x2="65" y2="65" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <line class="connector" x1="50" y1="70" x2="65" y2="70" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <!-- Error indicator -->
+  <circle cx="90" cy="62.5" r="6" fill="#fee2e2" opacity="0.5"/>
+  <line x1="87" y1="60" x2="93" y2="65" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <line x1="93" y1="60" x2="87" y2="65" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cable connector (disconnected) -->
+  <rect x="75" y="52" width="25" height="21" rx="2" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="3,2" opacity="0.6"/>
+</svg>
+

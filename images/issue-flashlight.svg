@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none">
+  <style>
+    @keyframes flash {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    .flash { animation: flash 1s ease-in-out infinite; }
+  </style>
+  <!-- Flashlight body -->
+  <rect x="40" y="50" width="60" height="30" rx="4" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <!-- Flashlight head -->
+  <circle cx="100" cy="65" r="18" stroke="#ef4444" stroke-width="3" fill="none"/>
+  <!-- Flash beam (should be bright but not working) -->
+  <path class="flash" d="M 100 47 Q 110 40, 120 47 Q 130 54, 120 65 Q 110 76, 100 83" stroke="#ef4444" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Broken indicator -->
+  <line x1="70" y1="60" x2="85" y2="70" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="85" y1="60" x2="70" y2="70" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- No light symbol -->
+  <circle cx="100" cy="65" r="8" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="2,2"/>
+</svg>
+
