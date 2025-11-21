@@ -52,7 +52,16 @@
   }
 
   // --- NEW: Handle Logout (defined outside) ---
-  
+  function handleLogout() {
+    if (confirm("Are you sure you want to log out?")) {
+      firebase.auth().signOut().then(() => {
+        console.log("User logged out.");
+        // The onAuthStateChanged listener will automatically update the UI
+      }).catch((error) => {
+        console.error("Error logging out:", error);
+      });
+    }
+  }
   
   /**
    * Finds all DOM elements and attaches listeners.
@@ -128,7 +137,16 @@
     }
 
     // --- Smart Login/Logout Button ---
-    
+    globalLoginBtn?.addEventListener("click", (e) => {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        // If user is logged IN, let the link go to account.html
+        // (Do nothing, default href works)
+      } else {
+        // If user is logged OUT, let the link go to login.html
+        // (Do nothing, default href works)
+      }
+    });
 
     // Close modal
     closeModal?.addEventListener("click", () => {
